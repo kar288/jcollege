@@ -16,7 +16,7 @@ import sys
 # Twill for CN login
 from twill import commands
 
-
+@login_required
 def question(request):
     context = {};
     return render(request, 'pages/question.html', context)
@@ -26,6 +26,8 @@ def about(request):
     return render(request, 'pages/about.html', context)
 
 def home(request):
+    if request.user and request.user.is_authenticated():
+        return redirect('/question')
     context = {
         'page': 'home'
     }
@@ -47,7 +49,7 @@ def home(request):
     #     context['error'] = "Wrong username or password!"
     #     return render(request, "pages/login_page.html", context)
     
-    users = jUser.objects.filter(username=l_username)
+    users = Student.objects.filter(username=l_username)
     if len(users) != 1:
         context['error'] = "The username does not exist in the DB!"
         return render(request, "pages/home.html", context)
