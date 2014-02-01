@@ -12,3 +12,7 @@ from app.models import *
 def home(request):
     context = {}
     return render(request, 'pages/home.html', context)
+
+def question(request):
+	context = {};
+    return render(request, 'pages/question.html', context)
