@@ -5,5 +5,6 @@ urlpatterns = patterns('',
     url(r'^$', 'app.views.home'),
     url(r'^question$', 'app.views.question', name='question'),
     url(r'^about$', 'app.views.about', name='about'),
+    url(r'^highscore$', 'app.views.highscore', name='highscore'),
     url(r'^logout', 'app.views.logout_action', name='logout')
 )

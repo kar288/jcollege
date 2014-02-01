@@ -25,6 +25,10 @@ def about(request):
     context = {};
     return render(request, 'pages/about.html', context)
 
+def highscore(request):
+    context = {};
+    return render(request, 'pages/highscore.html', context)
+
 def home(request):
     context = {
         'page': 'home'

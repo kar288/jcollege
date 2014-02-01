@@ -7,31 +7,25 @@ body {
 }
 
 .main-content{
-	height: 100%;
 }
 
 .home-content {
-	height: 100%;
 	padding: 0px 50px;
 }
 
 .container{
-	height: 100%;
 }
 
 .home-left {
-	padding-top: 20%;
-	height:100%;
+	padding: 25% 0;
 	background: #EEE
 }
 
 .home-login {
 	padding-top: 20%;
-	height:100%;
 }
 
 .info {
-	height: 100%;
 	margin: 0 auto;
 	text-align: center;
 }

@@ -29,3 +29,8 @@ class Question(models.Model):
 	content = models.CharField(max_length = 200);
 	answer = models.CharField(max_length = 200);
 
+class College(models.Model):
+	name = models.CharField(max_length=1,
+                                    choices=COLLEGES,
+                                    default=MERCATOR)
+	points = models.IntegerField(default = 0);
