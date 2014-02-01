@@ -63,6 +63,4 @@ def create_question(st, college, level):
     if choices != []:
         context['choices'] = random.shuffle(choices)
 
-    print target, target.jid
-
     return context

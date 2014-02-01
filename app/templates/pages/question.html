@@ -18,12 +18,13 @@
 					</a>
 		  		</div>
 		  		<div class="col-md-9">
-			  		<form class="center" action="{% url 'question' %}" method="POST" ng-app>
+			  		<form class="center question-form" action="{% url 'question' %}" method="POST" ng-app>
 			  			<div class="row">
 			  				<h5>
 			  					{{question.question_content}}	
-			  				<h5>
+			  				</h5>
 			  			</div>
+			  			{{question.choices}}
 			  			{% if question.choices %}
 				  			{% for choice in question.choices %}
 				  			<label class="radio-inline">
@@ -33,6 +34,9 @@
 			  			{% else %}
 			  				<input ng-model="answer" name="answer" type="text" class="form-control" placeholder="Answer me!" autofocus>
 			  			{% endif %}
+			  			<input type="hidden" name="jid" value="{{question.question_target.jid}}"></input>
+			  			<input type="hidden" name="question-type" value="{{question.question_type}}"></input>
+			  			{% csrf_token %}
 			  			<button type="button" class="submit-answer submit-button btn btn-lg btn-default" ng-disabled="!(answer)">submit</button>
 			  		</form>
 		  		</div>

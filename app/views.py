@@ -49,6 +49,10 @@ def highscore(request):
 
 @login_required
 def answer_question(request):
+    print request['POST']
+    print "BLABLABLABLA"
+
+
     user = get_object_or_404(Student, id =request.user)
 
     if request.method != 'POST':
