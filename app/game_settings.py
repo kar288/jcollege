@@ -42,7 +42,7 @@ def create_question(st, college, level):
     context = {}
     students = Student.objects.filter(college=college)
 
-    rr = random.randrange(level + 1)
+    rr = random.randrange(level)
     question_type = QUESTION_TYPES[ rr ]
     sample = random.sample(students.exclude(id=st.id), 4)
     target = sample[0]
