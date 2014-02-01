@@ -21,6 +21,10 @@ def question(request):
     context = {};
     return render(request, 'pages/question.html', context)
 
+def about(request):
+    context = {};
+    return render(request, 'pages/about.html', context)
+
 def home(request):
     context = {
         'page': 'home'

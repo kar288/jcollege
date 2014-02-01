@@ -1,12 +1,26 @@
-{% extends 'pages/base.html' %}
+{% extends 'pages/emptyBase.html' %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-md-8">
-            hi
+    <div class="row home-content">
+        <div class="col-md-8 home-left">
+            <div class="info">
+            	<h2>
+            		Who is Jack?
+            	</h2>
+            	<div>
+            		Get to know your college. <br>
+            		Answer questions and accumulate points for your college.
+            	</div>
+            </div>
         </div>
-        <div class="col-md-4">
-            bye
+        <div class="col-md-4 home-login">	
+        	<form class="vertical-center center" action="{% url 'home' %}" method="POST">
+				<h3> Sign in </h3>
+				<input name="username" type="text" class="form-control" placeholder="Username" autofocus>
+				<input name="password" type="password" class="form-control" placeholder="Password">
+				<button class="btn btn-lg btn-primary btn-block form-control" type="submit">Sign In</button>
+				{% csrf_token %}
+			</form>
         </div>
     </div>
 {% endblock %}
