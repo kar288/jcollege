@@ -2,13 +2,19 @@ import json
 from app.models import *
 from collections import OrderedDict
 
+def get_bad_ids(filename):
+	ids = [line.strip() for line in open(filename)]
+	return ids
+
 def college_to_database(college_name):
 	json_file = open("crawler/" + college_name + ".json")
 	json_data = json.load(json_file)
 	for juser in json_data:
+		jid = juser['id']
+		bad_ids = get_bad_ids("crawler/"+"bad_ids.txt")
 		major = juser['major']
 		exmat = major.find('exmatr')
-		if exmat == -1:
+		if exmat == -1 and not (jid in bad_ids):
 			major_list = ['CS', 'EECS', 'ECE', 'ESS', 'EE', 'ACM', 'PHY', 'BCCB', 'BCE', 'IRB', 'ISCP', 'IES', 'ICS', 'ISS', 'ILME', 'CPN', 'MATH', 'GEM', 'BIOCHEM', 'CHEM', 'BIOTECH', 'BIGSSS', 'IR', 'IMS', 'IL', 'BIO/NEURO', 'GH']
 			majors = ''
 			for major_name in major_list:
@@ -26,7 +32,7 @@ def college_to_database(college_name):
 			photourl = photourl.replace('jpeople.user.jacobs-university.de/utils/images/', 'swebtst01.public.jacobs-university.de/jPeople/image.php?id=')
 			photourl = photourl.replace('.jpg', '')
 			if True:
-				new_juser = Student(jid = juser['id'],\
+				new_juser = Student(jid = jid,\
 					fname = juser['fname'],\
 					lname = juser['lname'],\
 					email = juser['email'],\
