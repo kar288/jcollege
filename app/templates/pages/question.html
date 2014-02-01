@@ -3,43 +3,40 @@
 
 {% block content %}
 <div class="row">
-	<div class="panel panel-danger question-panel">
-	  <div class="panel-heading">
-	    <h3 class="panel-title">Jack asks you...</h3>
+	<div class="col-md-8">
+		<div class="panel question-panel">
+		  <div class="panel-heading">
+		    <h3 class="panel-title">Jack asks you...</h3>
+		  </div>
+		  <div class="panel-body">
+		  	<div class="row">
+		  		<div class="col-md-3">
+		  			<a href="#" class="thumbnail">
+						<img class="ratio" style="background-image:url('https://cdn1.iconfinder.com/data/icons/black-easy/512/535106-user_512x512.png')">
+					</a>
+		  		</div>
+		  		<div class="col-md-9">
+			  		<form class="center" action="{% url 'question' %}" method="POST">
+			  			<div class="row">
+			  				<div class="col-md-12">
+			  					What is your fucking problem?
+			  				</div>
+			  			</div>
+			  			<input name="answer" type="text" class="form-control" placeholder="Answer me!" autofocus>
+			  			<button type="button" class="form-control btn btn-lg btn-default">submit</button>
+			  		</form>
+		  		</div>
+		  	</div>
+		  </div>
 	  </div>
-	  <div class="panel-body">
-	  	<div class="row">
-	  		<div class="col-md-4">
-	  			picture here!
-	  		</div>
-	  		<div class="col-md-8">
-	  			<div class="row">
-	  				<div class="col-md-12">
-	  					What is your fucking problem?
-	  				</div>
-	  			</div>
-	  			<div class="row">
-	  				<div class="col-md-12">
-	  					Lol, easy man! chill
-	  				</div>
-	  			</div>
-	  		</div>
-	  	</div>
-
-	  	<div class="row">
-	  		<div class="col-md-4">
-	  		</div>
-	  		<div class="col-md-8">
-	  			<div class="row">
-	  				<div class="col-md-6">
-	  					<button type="button" class="btn btn-lg btn-default">skip</button>
-	  				</div>
-	  				<div class="col-md-6">
-	  					<button type="button" class="btn btn-lg btn-default">submit</button>
-	  				</div>
-	  		</div>
-	  	</div>
-	  </div>
+	</div>
+	<div class="col-md-4">
+		<div class="panel">
+			USER INFO
+		</div>
+		<div class="panel">
+			HIGHSCORE
+		</div>
 	</div>
 </div>
 {% endblock %}

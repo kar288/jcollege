@@ -80,3 +80,15 @@ body {
 .error {
 	color: rgb(240, 80, 80);
 }
+
+
+.ratio{
+    position:relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100% ; 
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+}
