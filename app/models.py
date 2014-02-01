@@ -7,10 +7,10 @@ COLLEGEIII = 'C'
 KRUPP = 'K'
 NORDMETALL = 'N'
 COLLEGES = (
-    (MERCATOR, 'Mercator'),
-    (COLLEGEIII, 'C3'),
-    (KRUPP, 'Krupp'),
-    (NORDMETALL, 'Nordmetall')
+	(MERCATOR, 'Mercator'),
+	(COLLEGEIII, 'C3'),
+	(KRUPP, 'Krupp'),
+	(NORDMETALL, 'Nordmetall')
 )
 
 class Student(User):
@@ -18,8 +18,8 @@ class Student(User):
 	lname = models.CharField(max_length = 100);
 	fname = models.CharField(max_length = 100);
 	college = models.CharField(max_length=1,
-                                    choices=COLLEGES,
-                                    default=MERCATOR)
+									choices=COLLEGES,
+									default=MERCATOR)
 	room = models.CharField(max_length = 6);
 	phone = models.CharField(max_length = 100);
 	country = models.CharField(max_length = 100);
@@ -27,6 +27,7 @@ class Student(User):
 	majorlong = models.CharField(max_length = 100);
 	major = models.CharField(max_length = 50);
 	photourl = models.CharField(max_length = 100);
+	points = models.IntegerField(default= 0)
 	
 class Question(models.Model):
 	about_user = models.ForeignKey(Student, unique=True);
@@ -35,6 +36,6 @@ class Question(models.Model):
 
 class College(models.Model):
 	name = models.CharField(max_length=1,
-                                    choices=COLLEGES,
-                                    default=MERCATOR)
+									choices=COLLEGES,
+									default=MERCATOR)
 	points = models.IntegerField(default = 0);

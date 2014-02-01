@@ -8,6 +8,7 @@ from mimetypes import guess_type
 
 # App Models
 from app.models import *
+from app.game_settings import *
 
 # 
 import os
