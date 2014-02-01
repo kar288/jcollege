@@ -1,4 +1,4 @@
-{% extends 'pages/emptyBase.html' %}
+{% extends 'pages/base.html' %}
 
 {% block content %}
     <div class="row home-content">
@@ -14,11 +14,16 @@
             </div>
         </div>
         <div class="col-md-4 home-login">	
-        	<form class="vertical-center center" action="{% url 'home' %}" method="POST">
+        	<form class="vertical-center center" action="{% url 'home' %}" method="POST" ng-app>
 				<h3> Sign in </h3>
-				<input name="user" type="text" class="form-control" placeholder="Username" autofocus>
-				<input name="pass" type="password" class="form-control" placeholder="Password">
-				<button class="btn btn-lg btn-primary btn-block form-control" type="submit">Sign In</button>
+				{% if error %}
+					<h5 class="error">
+						{{error}}
+					</h5>
+				{% endif %}
+				<input ng-model="user" name="user" type="text" class="form-control" placeholder="Username" autofocus>
+				<input ng-model="pass" name="pass" type="password" class="form-control" placeholder="Password">
+				<button class="btn btn-lg btn-primary btn-block form-control" type="submit" ng-disabled="!(user && pass)">Sign In</button>
 				{% csrf_token %}
 			</form>
         </div>

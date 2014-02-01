@@ -44,7 +44,8 @@ def home(request):
 
     if not 'user' in request.POST or not request.POST['user'] or \
         not 'pass' in request.POST or not request.POST['pass']:
-            raise Http404
+            context['error'] = "The username does not exist in the DB!"
+            return render(request, "pages/home.html", context)
 
     l_username = request.POST['user']
     # Uncomment this when testing is done

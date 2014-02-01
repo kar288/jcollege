@@ -11,6 +11,7 @@ body {
 
 .home-content {
 	padding: 0px 50px;
+	background: rgba(238, 238, 238, 0.80);
 }
 
 .container{
@@ -18,7 +19,7 @@ body {
 
 .home-left {
 	padding: 25% 0;
-	background: #EEE
+	background: rgba(238, 238, 238, 0.80);
 }
 
 .home-login {
@@ -74,4 +75,8 @@ body {
 .question-panel {
     width: 95%;
     margin: 0 auto;
+}
+
+.error {
+	color: rgb(240, 80, 80);
 }
