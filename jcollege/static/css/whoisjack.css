@@ -63,7 +63,19 @@ body {
   width: 100%;
   padding: 20px 50px;
   font-size: 11px;
-/*QUESTION*/
+}
+
+/* BACKGROUND */
+
+body {
+    background: url(../images/bg.png) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+}
+
+/* QUESTION */
 
 .question-panel {
     width: 95%;
