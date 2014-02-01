@@ -53,7 +53,7 @@ def create_question(st, college, level):
 
     choices = []
     if question_type[0] == 'name_1':
-        choices = [(t.fname + t.lname) for t in sample]
+        choices = [(t.fname + " " + t.lname) for t in sample]
     elif question_type[0] == 'year':
         choices = ['14', '15', '16']
     elif question_type[0] == 'country':
@@ -61,6 +61,6 @@ def create_question(st, college, level):
     elif question_type[0] == 'major':
         choices = [ t.major for t in sample ]
     if choices != []:
-        context['choices'] = choices
+        context['choices'] = random.shuffle(choices)
 
     return context
