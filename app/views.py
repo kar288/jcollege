@@ -59,16 +59,17 @@ def answer_question(request):
     user = get_object_or_404(Student, id =request.user.id)
 
     if request.method != 'POST':
-    	print "POST BAD"
+        print "POST BAD"
         raise Http404
 
     if not 'uid' in request.POST or not request.POST['uid'] or \
         not 'answer' in request.POST or not request.POST['answer'] or \
         not 'q_type' in request.POST or not request.POST['q_type']:
-            print "NOT FIELDS"
             raise Http404
 
-    target = get_object_or_404(Student, id=request.POST['uid'])
+
+    target = get_object_or_404(Student, jid=request.POST['uid'])
+    print 'after target'
     q_type = request.POST['q_type']
     correct = verify_question(user, target, q_type, request.POST['answer'])
 
@@ -93,7 +94,7 @@ def answer_question(request):
     else:
         result['result'] = False
 
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
+    return HttpResponse(json.dumps(result), content_type="application/json")
 
 def home(request):
     if request.user and request.user.is_authenticated():
