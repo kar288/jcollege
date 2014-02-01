@@ -9,6 +9,9 @@ def college_to_database(college_name):
 		username = username.replace('@jacobs-university.de', '')
 		username = username.replace('.', '')
 		password = '1234'
+		photourl = juser['photo']
+		photourl = photourl.replace('jpeople.user.jacobs-university.de/utils/images/', 'swebtst01.public.jacobs-university.de/jPeople/image.php?id=')
+		photourl = photourl.replace('.jpg', '')
 		new_juser = Student(jid = juser['id'],\
 			fname = juser['fname'],\
 			lname = juser['lname'],\
@@ -23,7 +26,8 @@ def college_to_database(college_name):
 			majorinfo = juser['majorinfo'],\
 			majorlong = juser['majorlong'],\
 			major = juser['major'],\
-			photourl = juser['photo'])
+			photourl = photourl)
+		new_juser.set_password(password)
 		new_juser.save()
 
 
