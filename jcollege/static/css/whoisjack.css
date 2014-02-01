@@ -15,6 +15,7 @@ body {
 	padding: 0px 50px;
 }
 
+<<<<<<< HEAD
 .container{
 	height: 100%;
 }
@@ -63,4 +64,11 @@ body {
   width: 100%;
   padding: 20px 50px;
   font-size: 11px;
+=======
+/*QUESTION*/
+
+.question-panel {
+    width: 95%;
+    margin: 0 auto;
+>>>>>>> 82f8c2f338b928d7b7e9020d3a38983ad7fc0ea8
 }
