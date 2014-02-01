@@ -32,7 +32,12 @@ body {
 }
 
 .form-control{
-	margin: 5px;
+	margin: 10px 0px;
+	height: 45px;
+}
+
+.submit-button {
+	width: 100%;
 }
 
 .vertical-center{

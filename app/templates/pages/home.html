@@ -23,7 +23,7 @@
 				{% endif %}
 				<input ng-model="user" name="user" type="text" class="form-control" placeholder="Username" autofocus>
 				<input ng-model="pass" name="pass" type="password" class="form-control" placeholder="Password">
-				<button class="btn btn-lg btn-primary btn-block form-control" type="submit" ng-disabled="!(user && pass)">Sign In</button>
+				<button class="btn btn-lg btn-primary btn-block submit-button" type="submit" ng-disabled="!(user && pass)">Sign In</button>
 				{% csrf_token %}
 			</form>
         </div>
