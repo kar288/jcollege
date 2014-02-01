@@ -15,4 +15,4 @@ def home(request):
 
 def question(request):
 	context = {};
-    return render(request, 'pages/question.html', context)
+	return render(request, 'pages/question.html', context)
