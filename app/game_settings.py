@@ -65,3 +65,18 @@ def create_question(st, college, level):
         context['choices'] = choices
 
     return context
+
+def verify_question(user, target, question_type, answer):
+    if question_type == 'name':
+        return (target.fname + " " + target.lname == answer)
+    elif question_type == 'year':
+        return (target.year == answer)
+    elif question_type == 'country':
+        return (target.country == answer)
+    elif question_type == 'major':
+        return (target.major == answer)
+    elif question_type == 'fname':
+        return (target.fname == answer)
+    elif question_type == 'lname':
+        return (target.lname == answer)
+    return False
