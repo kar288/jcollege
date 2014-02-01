@@ -2,7 +2,7 @@
 
 from os import environ, path
 
-DEBUG = environ.get('JCOURSE_DEBUG_STATE', 'True') == 'True'
+DEBUG = environ.get('JCOLLEGE_DEBUG_STATE', 'True') == 'True'
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -18,12 +18,12 @@ PROJECT_ROOT = path.realpath(path.dirname(__file__)) + '/'
 
 DATABASES = {
     'default': {
-        'ENGINE': environ.get('JCOURSE_DATABASE_BACKEND', 'django.db.backends.sqlite3'),
-        'NAME': environ.get('JCOURSE_DATABASE_NAME', PROJECT_ROOT + 'db/database.db'),
-        'USER': environ.get('JCOURSE_DATABASE_USER', ''),
-        'PASSWORD': environ.get('JCOURSE_DATABASE_PASSWORD', ''),
-        'HOST': environ.get('JCOURSE_DATABASE_HOST', ''),
-        'PORT': environ.get('JCOURSE_DATABASE_PORT', ''),
+        'ENGINE': environ.get('JCOLLEGE_DATABASE_BACKEND', 'django.db.backends.sqlite3'),
+        'NAME': environ.get('JCOLLEGE_DATABASE_NAME', PROJECT_ROOT + 'db/database.db'),
+        'USER': environ.get('JCOLLEGE_DATABASE_USER', ''),
+        'PASSWORD': environ.get('JCOLLEGE_DATABASE_PASSWORD', ''),
+        'HOST': environ.get('JCOLLEGE_DATABASE_HOST', ''),
+        'PORT': environ.get('JCOLLEGE_DATABASE_PORT', ''),
     }
 }
 
@@ -92,7 +92,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = environ.get('JCOURSE_SECRET_KEY', '^vix^ohv5hl+w9yv(o!1-b#$54vm_p$12s(a7iiz14u*c&gs@1')
+SECRET_KEY = environ.get('JCOLLEGE_SECRET_KEY', '^vix^ohv5hl+w9yv(o!1-b#$54vm_p$12s(a7iiz14u*c&gs@1')
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
