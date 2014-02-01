@@ -12,18 +12,28 @@
 		  	<div class="row">
 		  		<div class="col-md-3">
 		  			<a href="#" class="thumbnail">
-						<img class="ratio" style="background-image:url('https://cdn1.iconfinder.com/data/icons/black-easy/512/535106-user_512x512.png')">
+						<img class="ratio" style="background-image:url('{{question.question_target.photourl}}')">
+						
+						
 					</a>
 		  		</div>
 		  		<div class="col-md-9">
-			  		<form class="center" action="{% url 'question' %}" method="POST">
+			  		<form class="center" action="{% url 'question' %}" method="POST" ng-app>
 			  			<div class="row">
-			  				<div class="col-md-12">
-			  					What is your fucking problem?
-			  				</div>
+			  				<h5>
+			  					{{question.question_content}}	
+			  				<h5>
 			  			</div>
-			  			<input name="answer" type="text" class="form-control" placeholder="Answer me!" autofocus>
-			  			<button type="button" class="submit-button btn btn-lg btn-default">submit</button>
+			  			{% if question.choices %}
+				  			{% for choice in question.choices %}
+				  			<label class="radio-inline">
+				  			<input ng-model="answer" type="radio" name="answer" value="{{choice}}"> {{choice}} 
+				  			</label><br>
+				  			{% endfor%}
+			  			{% else %}
+			  				<input ng-model="answer" name="answer" type="text" class="form-control" placeholder="Answer me!" autofocus>
+			  			{% endif %}
+			  			<button type="button" class="submit-answer submit-button btn btn-lg btn-default" ng-disabled="!(answer)">submit</button>
 			  		</form>
 		  		</div>
 		  	</div>
