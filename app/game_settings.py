@@ -15,7 +15,7 @@ POINT_PER_LEVEL = [3, 5, 10, 25, 50, 75, 150]
 POINT_TO_LEVEL = transform_to_level(POINT_PER_LEVEL)
 
 QUESTION_TYPES = \
-    [('name_1', 1), \
+    [('name', 1), \
     ('year', 1), \
     ('country', 2), \
     ('major', 3), \
@@ -24,7 +24,7 @@ QUESTION_TYPES = \
     ('roommate', 7)]
 
 QUESTION_CONTENT = {
-    'name_1': 'What is the name of this person?',
+    'name': 'What is the name of this person?',
     'year': 'What is the year of study of this person?',
     'country': 'What is this person country of residence?',
     'major': "What is this person's major?",
@@ -52,7 +52,7 @@ def create_question(st, college, level):
     context['question_target'] = target
 
     choices = []
-    if question_type[0] == 'name_1':
+    if question_type[0] == 'name':
         choices = [(t.fname + " " + t.lname) for t in sample]
     elif question_type[0] == 'year':
         choices = ['14', '15', '16']

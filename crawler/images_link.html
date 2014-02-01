@@ -1,0 +1,30 @@
+<html>
+<head>
+</head>
+<body>
+<!--
+
+from app.models import *
+
+f = open('images_links', 'w')
+
+for st in Student.objects.all():
+   f.write('<img class="img" id="' + str(st.jid) + '" src="' + st.photourl + '" alt="missing">')
+
+f.close()
+
+-->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+
+        var bad_images = []
+        $('.img').click( function() {
+            bad_images.push( this.id );
+            console.log( bad_images )
+        });
+    </script>
+
+</body>
+</html>
