@@ -109,7 +109,7 @@ def home(request):
 
     if not 'user' in request.POST or not request.POST['user'] or \
         not 'pass' in request.POST or not request.POST['pass']:
-            context['error'] = "The username does not exist in the DB!"
+            context['error'] = "The username does not exist!"
             return render(request, "pages/home.html", context)
 
     l_username = request.POST['user']
@@ -122,7 +122,7 @@ def home(request):
     
     users = Student.objects.filter(username=l_username)
     if len(users) != 1:
-        context['error'] = "The username does not exist in the DB!"
+        context['error'] = "The username does not exist!"
         return render(request, "pages/home.html", context)
 
     user = authenticate(username=l_username, password="1234")

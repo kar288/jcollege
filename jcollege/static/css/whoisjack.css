@@ -102,3 +102,7 @@ body {
     background-size: cover;
 
 }
+
+.question-info-panel {
+    margin-bottom: 1px;
+}
