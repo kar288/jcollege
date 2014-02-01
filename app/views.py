@@ -19,15 +19,26 @@ from twill import commands
 
 @login_required
 def question(request):
-    context = {};
+    context = {
+        'page': 'question'
+    }
+
+    userid = request.user.id
+    user = get_object_or_404(Student, id= userid)
+    context['user'] = user
+
+    level = get_level(user)
+    context['level'] = level
+    context['question'] = create_question(user, user.college, level)
+
     return render(request, 'pages/question.html', context)
 
 def about(request):
-    context = {};
+    context = {}
     return render(request, 'pages/about.html', context)
 
 def highscore(request):
-    context = {};
+    context = {}
     return render(request, 'pages/highscore.html', context)
 
 def home(request):
