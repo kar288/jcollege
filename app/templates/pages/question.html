@@ -34,8 +34,8 @@
 			  			{% else %}
 			  				<input ng-model="answer" name="answer" type="text" class="form-control" placeholder="Answer me!" autofocus>
 			  			{% endif %}
-			  			<input type="hidden" name="jid" value="{{question.question_target.jid}}"></input>
-			  			<input type="hidden" name="question-type" value="{{question.question_type}}"></input>
+			  			<input type="hidden" name="uid" value="{{question.question_target.jid}}"></input>
+			  			<input type="hidden" name="q_type" value="{{question.question_type}}"></input>
 			  			{% csrf_token %}
 			  			<button type="button" class="submit-answer submit-button btn btn-lg btn-default" ng-disabled="!(answer)">submit</button>
 			  		</form>

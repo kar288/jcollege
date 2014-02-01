@@ -49,18 +49,23 @@ def highscore(request):
 
 @login_required
 def answer_question(request):
-    print request['POST']
+    print request.POST['uid']
+    print request.POST['answer']
+    print request.POST['q_type']
     print "BLABLABLABLA"
+    print 'USER ' , request.user.id
 
 
-    user = get_object_or_404(Student, id =request.user)
+    user = get_object_or_404(Student, id =request.user.id)
 
     if request.method != 'POST':
+    	print "POST BAD"
         raise Http404
 
-    if not 'uid' in request.POST or request.POST['uid'] or \
-        not 'answer' in request.POST or request.POST['answer'] or \
-        not 'q_type' in request.POST or request.POST['q_type']:
+    if not 'uid' in request.POST or not request.POST['uid'] or \
+        not 'answer' in request.POST or not request.POST['answer'] or \
+        not 'q_type' in request.POST or not request.POST['q_type']:
+            print "NOT FIELDS"
             raise Http404
 
     target = get_object_or_404(Student, id=request.POST['uid'])
