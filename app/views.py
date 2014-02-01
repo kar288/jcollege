@@ -21,7 +21,8 @@ from twill import commands
 @login_required
 def question(request):
     context = {
-        'page': 'question'
+        'page': 'question',
+        'user_auth': user_authenticated(request)
     }
 
     userid = request.user.id
@@ -35,11 +36,15 @@ def question(request):
     return render(request, 'pages/question.html', context)
 
 def about(request):
-    context = {}
+    context = {
+        'user_auth': user_authenticated(request)
+    }
     return render(request, 'pages/about.html', context)
 
 def highscore(request):
-    context = {}
+    context = {
+        'user_auth': user_authenticated(request)
+    }
     return render(request, 'pages/highscore.html', context)
 
 @login_required
@@ -144,3 +149,8 @@ def campusnet_login(l_username, l_password):
     sys.stdout = out
 
     return returned_page
+
+def user_authenticated(request):
+    if request.user and request.user.is_authenticated():
+        return request.user.username
+    return False

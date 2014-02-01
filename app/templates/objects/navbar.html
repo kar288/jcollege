@@ -8,4 +8,9 @@
     </button>
     <a class="navbar-brand" href="/home">WhoIsjAck</a>
   </div>
+  {% if user_auth %}
+  <ul class="nav navbar-nav navbar-right">
+    <li><a href="{% url 'logout' %}">Logout {{ user_auth }}</a></li>
+  </ul>
+  {% endif %}
 </nav>
