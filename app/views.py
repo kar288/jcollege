@@ -13,22 +13,73 @@ from app.game_settings import *
 # 
 import os
 import sys
+import json
 
 # Twill for CN login
 from twill import commands
 
 @login_required
 def question(request):
-    context = {};
+    context = {
+        'page': 'question'
+    }
+
+    userid = request.user.id
+    user = get_object_or_404(Student, id= userid)
+    context['user'] = user
+
+    level = get_level(user)
+    context['level'] = level
+    context['question'] = create_question(user, user.college, level)
+
     return render(request, 'pages/question.html', context)
 
 def about(request):
-    context = {};
+    context = {}
     return render(request, 'pages/about.html', context)
 
 def highscore(request):
-    context = {};
+    context = {}
     return render(request, 'pages/highscore.html', context)
+
+@login_required
+def answer_question(request):
+    user = get_object_or_404(Student, id =request.user)
+
+    if request.method != 'POST':
+        raise Http404
+
+    if not 'uid' in request.POST or request.POST['uid'] or \
+        not 'answer' in request.POST or request.POST['answer'] or \
+        not 'q_type' in request.POST or request.POST['q_type']:
+            raise Http404
+
+    target = get_object_or_404(Student, id=request.POST['uid'])
+    q_type = request.POST['q_type']
+    correct = verify_question(user, target, q_type, request.POST['answer'])
+
+    result = {}
+    if correct:
+        result['result'] = True
+
+        old_level = get_level(user)
+        added_points = dict(QUESTION_TYPES)[ q_type ]
+        user.points += added_points
+        user.save()
+        col = College.objects.get(name=user.college)
+        col.points += added_points
+        col.save()
+        new_level = get_level(user)
+
+        result['new_points'] = added_points
+        result['new_total'] = user.points
+        result['new_total_college'] = col.points
+        if old_level != new_level:
+            result['levelup'] = True
+    else:
+        result['result'] = False
+
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 def home(request):
     if request.user and request.user.is_authenticated():
@@ -44,7 +95,8 @@ def home(request):
 
     if not 'user' in request.POST or not request.POST['user'] or \
         not 'pass' in request.POST or not request.POST['pass']:
-            raise Http404
+            context['error'] = "The username does not exist in the DB!"
+            return render(request, "pages/home.html", context)
 
     l_username = request.POST['user']
     # Uncomment this when testing is done

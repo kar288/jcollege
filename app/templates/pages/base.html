@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="customInterpolationApp">
   <head>
     <title>WhoIsjAck</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,17 +10,24 @@
     <link href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet" >
   </head>
   <body>
+    <div class="wrap">
+      <div class="container">
 
-    <div class="container">
-      {% include 'objects/navbar.html' %}
+          {% block bar %}
+          {% endblock %}
 
-      <div class="main-content">
-        {% block content %}
-        {% endblock %}
+        <div class="main-content">
+          {% block content %}
+          {% endblock %}
+        </div>
       </div>
     </div>
 
+
     {% include 'objects/footer.html' %}
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.4/angular.min.js"></script>
+    <script src="{{ STATIC_URL }}js/script.js"></script>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>

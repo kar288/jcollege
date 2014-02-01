@@ -16,6 +16,7 @@ h3.signin-header{
 
 .home-content {
 	padding: 0px 50px;
+	background: rgba(238, 238, 238, 0.80);
 }
 
 .container{
@@ -23,7 +24,7 @@ h3.signin-header{
 
 .home-left {
 	padding: 25% 0;
-	background: #EEE
+	background: rgba(238, 238, 238, 0.80);
 }
 
 .home-login {
@@ -36,7 +37,12 @@ h3.signin-header{
 }
 
 .form-control{
-	margin: 5px;
+	margin: 10px 0px;
+	height: 45px;
+}
+
+.submit-button {
+	width: 100%;
 }
 
 .vertical-center{
@@ -79,4 +85,20 @@ body {
 .question-panel {
     width: 95%;
     margin: 0 auto;
+}
+
+.error {
+	color: rgb(240, 80, 80);
+}
+
+
+.ratio{
+    position:relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 100% ; 
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
 }
