@@ -47,7 +47,7 @@ def create_question(st, college, level):
     sample = random.sample(students.exclude(id=st.id), 4)
     target = sample[0]
 
-    context['question_type'] = QUESTION_TYPES[0]
+    context['question_type'] = question_type
     context['question_content'] = QUESTION_CONTENT[ question_type[0] ]
     context['question_target'] = target
 
@@ -61,6 +61,7 @@ def create_question(st, college, level):
     elif question_type[0] == 'major':
         choices = [ t.major for t in sample ]
     if choices != []:
-        context['choices'] = random.shuffle(choices)
+        random.shuffle(choices)
+        context['choices'] = choices
 
     return context
