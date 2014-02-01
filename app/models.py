@@ -26,6 +26,7 @@ class Student(User):
 	majorinfo = models.CharField(max_length = 100);
 	majorlong = models.CharField(max_length = 100);
 	major = models.CharField(max_length = 50);
+	year = models.CharField(max_length = 10);
 	photourl = models.CharField(max_length = 100);
 	points = models.IntegerField(default= 0)
 	
