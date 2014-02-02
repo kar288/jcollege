@@ -69,9 +69,6 @@ def answer_question(request):
         added_points = dict(QUESTION_TYPES)[ q_type ]
         user.points += added_points
         user.save()
-        print user.college
-        print College.objects.filter(name=user.college)
-        print College.objects.all()
         col = College.objects.filter(name=user.college)[0]
         col.points += added_points
         col.save()

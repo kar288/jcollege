@@ -21,7 +21,7 @@ QUESTION_TYPES = \
     ('major', 3), \
     ('fname', 5), \
     ('lname', 5), \
-    ('roommate', 7)]
+    ('roommate', 8)]
 
 QUESTION_CONTENT = {
     'name': 'What is the name of this person?',
@@ -61,7 +61,7 @@ def create_question(st, college, level):
 
     rr = random.randrange(level)
     question_type = QUESTION_TYPES[ rr ]
-    allstudents = [t for t in students.exclude(id=st.id)]
+    allstudents = [st for st in students.exclude(id=st.id)]
     random.shuffle(allstudents)
     target = None
 
@@ -78,10 +78,8 @@ def create_question(st, college, level):
     elif question_type[0] == 'country':
         target = allstudents[0]
         choices = []
-        print target.country
         for t in allstudents:
             if not t.country in choices:
-                print choices
                 choices.append( t.country )
                 if len(choices) == 4:
                     break
@@ -94,6 +92,28 @@ def create_question(st, college, level):
                 choices.append( t.major )
                 if len(choices) == 4:
                     break
+    elif question_type[0] == 'roommate':
+        choices = []
+        addnow = False
+        for t in allstudents:
+            if addnow:
+                if not (t.fname + " " + t.lname) in choices:
+                    choices.append(t.fname + " " + t.lname)
+                if len(choices) == 4:
+                    break
+                else:
+                    continue
+            if t.room != "":
+                fpart = t.room[0:3]
+                roomnr = int(t.room[3:])
+                lookfor1 = fpart + str(roomnr - 1)
+                lookfor2 = fpart + str(roomnr + 1)
+                roommates = Student.objects.filter(room=lookfor1) | Student.objects.filter(room=lookfor2)
+                if len(roommates) > 0:
+                    if target == None:
+                        target = t
+                        choices.append(roommates[0].fname + " " + roommates[0].lname)
+                        addnow = True
     else:
         target = allstudents[0]
     if choices != []:
@@ -116,7 +136,20 @@ def verify_question(user, target, question_type, answer):
     elif question_type == 'major':
         return (target.major == answer)
     elif question_type == 'fname':
-        return (target.fname == answer)
+        return answer in target.fname.split(' ')
     elif question_type == 'lname':
-        return (target.lname == answer)
+        return answer in target.lname.split(' ')
+    elif question_type == 'roommate':
+        names = answer.split(" ")
+        useranswer = None
+        for st in Student.objects.all():
+            thisisit = True
+            for name in names:
+                thisisit = thisisit and (name in st.fname or name in st.lname)
+            if thisisit:
+                useranswer = st
+                break
+        if useranswer == None:
+            return False
+        return abs(int(useranswer.room[3:]) - int(target.room[3:])) == 1
     return False
