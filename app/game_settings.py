@@ -11,7 +11,7 @@ def transform_to_level(PT_PER_LVL):
         r.append(s)
     return r
 
-POINT_PER_LEVEL = [3, 5, 10, 25, 50, 75, 150, 300, 600]
+POINT_PER_LEVEL = [3, 5, 10, 25, 50, 75, 150, 300, 600, 1000000]
 POINT_TO_LEVEL = transform_to_level(POINT_PER_LEVEL)
 
 QUESTION_TYPES = \
@@ -37,16 +37,18 @@ YEARS = ['14', '15', '16']
 YEARS_NAMES = ['Year 2014', 'Year 2015', 'Year 2016']
 
 LEVEL_NAMES = {
-    0: "New Born",
-    1: "Auslander",
-    2: "Peitgen",
-    3: "Lafayetty",
-    4: "Appetito Chef",
-    5: "Nordie",
-    6: "Hey, use jCourse",
-    7: "TOS Bartender",
-    8: "College Master",
-    9: "Jack"
+    0: "No one",
+    1: "New Born",
+    2: "Auslander",
+    3: "Peitgen",
+    4: "Lafayettee",
+    5: "Appetito Chef",
+    6: "Nordie",
+    7: "'Hey, use jCourse'",
+    8: "TOS Bartender",
+    9: "College Master",
+    10: "Jack",
+    11: 'Andrei Militaru'
 }
 
 def get_level(st):
