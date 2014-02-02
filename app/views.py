@@ -49,17 +49,9 @@ def highscore(request):
 
 @login_required
 def answer_question(request):
-    print request.POST['uid']
-    print request.POST['answer']
-    print request.POST['q_type']
-    print "BLABLABLABLA"
-    print 'USER ' , request.user.id
-
-
     user = get_object_or_404(Student, id =request.user.id)
 
     if request.method != 'POST':
-        print "POST BAD"
         raise Http404
 
     if not 'uid' in request.POST or not request.POST['uid'] or \
@@ -69,7 +61,6 @@ def answer_question(request):
 
 
     target = get_object_or_404(Student, jid=request.POST['uid'])
-    print 'after target'
     q_type = request.POST['q_type']
     correct = verify_question(user, target, q_type, request.POST['answer'])
 
@@ -81,7 +72,7 @@ def answer_question(request):
         added_points = dict(QUESTION_TYPES)[ q_type ]
         user.points += added_points
         user.save()
-        col = College.objects.get(name=user.college)
+        col = College.objects.filter(name=user.college)[0]
         col.points += added_points
         col.save()
         new_level = get_level(user)
