@@ -17,7 +17,7 @@ function submitAnswer(event) {
         	$('.footer-container').append(data.footer);
 			$('.next-question').click(newQuestion)
 			$('.profile-content').empty();
-			console.log(data)
+			console.log(data.levelup)
 			$('.profile-content').append(data.profile)
         },
         error: function(data) {
