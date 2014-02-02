@@ -82,7 +82,7 @@ def create_question(st, college, level):
     students = Student.objects.filter(college=college)
 
     rr = random.randrange(level)
-    question_type = QUESTION_TYPES[ rr ]
+    question_type = QUESTION_TYPES[ max([rr, len(QUESTION_TYPES)]) ]
     allstudents = [st for st in students.exclude(id=st.id)]
     random.shuffle(allstudents)
     target = None
