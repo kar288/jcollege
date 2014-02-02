@@ -33,10 +33,13 @@ QUESTION_CONTENT = {
     'roommate': "Who is this person's roommate?"
 }
 
+YEARS = ['14', '15', '16']
+
 def get_level(st):
     for level in range(len(POINT_TO_LEVEL)):
         if POINT_TO_LEVEL[level] > st.points:
             return level + 1
+    return len(POINT_TO_LEVEL)
 
 def create_question(st, college, level):
     context = {}
@@ -44,25 +47,47 @@ def create_question(st, college, level):
 
     rr = random.randrange(level)
     question_type = QUESTION_TYPES[ rr ]
-    sample = random.sample(students.exclude(id=st.id), 4)
-    target = sample[0]
+    print question_type
+    allstudents = [t for t in students.exclude(id=st.id)]
+    random.shuffle(allstudents)
+    target = None
+
+    choices = []
+    if question_type[0] == 'name':
+        target = allstudents[0]
+        choices = [(t.fname + " " + t.lname) for t in allstudents[0:4]]
+    elif question_type[0] == 'year':
+        while t in allstudents:
+            if t.year in YEARS:
+                target = t
+                break
+        choices = YEARS
+    elif question_type[0] == 'country':
+        target = allstudents[0]
+        choices = []
+        while t in allstudents:
+            if not t.country in choices:
+                choices.append( t.country )
+                if len(choices) == 4:
+                    break
+    elif question_type[0] == 'major':
+        choices = []
+        while t in allstudents:
+            if not t.major in choices:
+                if target == None:
+                    target = t
+                choices.append( t.major )
+                if len(choices) == 4:
+                    break
+    else:
+        target = allstudents[0]
+    if choices != []:
+        random.shuffle(choices)
+        context['choices'] = choices
 
     context['question_type'] = question_type
     context['question_content'] = QUESTION_CONTENT[ question_type[0] ]
     context['question_target'] = target
-
-    choices = []
-    if question_type[0] == 'name':
-        choices = [(t.fname + " " + t.lname) for t in sample]
-    elif question_type[0] == 'year':
-        choices = ['14', '15', '16']
-    elif question_type[0] == 'country':
-        choices = [ t.country for t in sample ]
-    elif question_type[0] == 'major':
-        choices = [ t.major for t in sample ]
-    if choices != []:
-        random.shuffle(choices)
-        context['choices'] = choices
 
     return context
 
