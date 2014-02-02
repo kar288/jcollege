@@ -47,7 +47,6 @@ def create_question(st, college, level):
 
     rr = random.randrange(level)
     question_type = QUESTION_TYPES[ rr ]
-    print question_type
     allstudents = [t for t in students.exclude(id=st.id)]
     random.shuffle(allstudents)
     target = None
@@ -57,7 +56,7 @@ def create_question(st, college, level):
         target = allstudents[0]
         choices = [(t.fname + " " + t.lname) for t in allstudents[0:4]]
     elif question_type[0] == 'year':
-        while t in allstudents:
+        for t in allstudents:
             if t.year in YEARS:
                 target = t
                 break
@@ -65,15 +64,17 @@ def create_question(st, college, level):
     elif question_type[0] == 'country':
         target = allstudents[0]
         choices = []
-        while t in allstudents:
+        print target.country
+        for t in allstudents:
             if not t.country in choices:
+                print choices
                 choices.append( t.country )
                 if len(choices) == 4:
                     break
     elif question_type[0] == 'major':
         choices = []
-        while t in allstudents:
-            if not t.major in choices:
+        for t in allstudents:
+            if t.major != "" and not t.major in choices:
                 if target == None:
                     target = t
                 choices.append( t.major )
