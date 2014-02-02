@@ -34,6 +34,7 @@ QUESTION_CONTENT = {
 }
 
 YEARS = ['14', '15', '16']
+YEARS_NAMES = ['Year 2014', 'Year 2015', 'Year 2016']
 
 LEVEL_NAMES = {
     0: "New Born",
@@ -93,7 +94,7 @@ def create_question(st, college, level):
             if t.year in YEARS:
                 target = t
                 break
-        choices = YEARS
+        choices = YEARS_NAMES
     elif question_type[0] == 'country':
         target = allstudents[0]
         choices = []
@@ -149,7 +150,7 @@ def verify_question(user, target, question_type, answer):
     if question_type == 'name':
         return (target.fname + " " + target.lname == answer)
     elif question_type == 'year':
-        return (target.year == answer)
+        return ("Year 20" + target.year == answer)
     elif question_type == 'country':
         return (target.country == answer)
     elif question_type == 'major':
