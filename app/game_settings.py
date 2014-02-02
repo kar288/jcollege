@@ -24,13 +24,13 @@ QUESTION_TYPES = \
     ('roommate', 9)]
 
 QUESTION_CONTENT = {
-    'name': 'What is the name of this person?',
-    'year': 'What is the graduation year of this person?',
-    'country': 'What is the nationality of this person?',
-    'major': "What is this person's major?",
-    'fname': "What is this person's first name?",
+    'name': 'Who\'s this?',
+    'year': 'In which year are we getting rid of him/her?',
+    'country': 'Where is (s)he coming from?',
+    'major': "What is (s)he studying?",
+    'fname': "His/her mama calls him/her (first name)?",
     'lname': "What is this person's last name?",
-    'roommate': "Who is this person's roommate?"
+    'roommate': "Who is his/her roomie?"
 }
 
 YEARS = ['14', '15', '16']
