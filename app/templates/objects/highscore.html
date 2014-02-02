@@ -91,13 +91,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <img class="college-icon" src="{{ user.photourl }}" alt="asd">
+                            <img class="college-icon" src="{{ user.photourl }}{{photo}}" alt="asd">
                         </td>
                         <td>
-                            {{ user.fname }}
+                            {{ user.fname }}{{fname}}
                         </td>
                         <td>
-                            {{ user.points }}
+                            {{points}}
                         </td>
                     </tr>
                 {% endif %}

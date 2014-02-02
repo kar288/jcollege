@@ -144,6 +144,15 @@ def answer_question(request):
     highscores = loader.get_template('objects/highscore.html')
     context = {}
     context['top_players'] = get_top_players(user)
+    context['user'] = user;
+    if user not in context['top_players']:
+        context['not_in_top'] = True;
+        context['user'] = user
+        context['fname'] = user.fname
+        context['points'] = user.points;
+        context['photo'] = user.photourl
+        print user.fname, user.points, user.photourl
+
     colleges = sorted(College.objects.all(),key=lambda x:x.points, reverse=True)
     lst = []
     for c in colleges:
