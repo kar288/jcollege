@@ -41,12 +41,6 @@ def about(request):
     }
     return render(request, 'pages/about.html', context)
 
-def highscore(request):
-    context = {
-        'user_auth': user_authenticated(request)
-    }
-    return render(request, 'pages/highscore.html', context)
-
 @login_required
 def answer_question(request):
     user = get_object_or_404(Student, id =request.user.id)
