@@ -130,9 +130,13 @@ def answer_question(request):
     profile = loader.get_template('objects/profile.html')
     reqContextProfile = RequestContext(request, result)
     response_data_profile = profile.render(reqContextProfile);
-
     result['profile'] = response_data_profile;
 
+    if 'levelup' in result and result['levelup']:
+        levelup = loader.get_template('objects/levelup.html')
+        reqContextLevelup = RequestContext(request, result)
+        response_data_levelup = levelup.render(reqContextProfile);
+        result['levelup'] = response_data_levelup
 
     return HttpResponse(json.dumps(result), content_type="application/json")
 

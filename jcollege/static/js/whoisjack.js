@@ -1,24 +1,30 @@
 $(document).ready(function(){	
 	$('.question-form').submit(submitAnswer)
-	console.log($('.question-form'))
 });
 
 function submitAnswer(event) {
 	event.preventDefault();
 	var frm = $('.question-form')
-	console.log('submitting form')
-	console.log(frm.serialize())
 	$.ajax({
         type: frm.attr('method'),
         url: '/answer_question/',
         data: frm.serialize(),
         success: function (data) {
+        	console.log(data.levelup)
+        	if (data.levelup) {
+        		console.log('leveledup')
+        		console.log(data.levelup)
+				$('.question-wrapper').empty();
+				$('.question-wrapper').append(data.levelup)
+				$('.continue').click(newQuestion);
+			}
         	$('.submit-answer').remove()
         	$('.footer-container').append(data.footer);
 			$('.next-question').click(newQuestion)
 			$('.profile-content').empty();
-			console.log(data.levelup)
 			$('.profile-content').append(data.profile)
+			$("input").prop('disabled', true);
+
         },
         error: function(data) {
             console.log('bad')
@@ -27,9 +33,7 @@ function submitAnswer(event) {
 }
 
 function newQuestion() {
-	console.log('new question')
 	$.getJSON("/new_question/", function(data) {
-		console.log(data.question)
 		$('.question-wrapper').empty()
 		$('.question-wrapper').append(data.question)
 		var frm = $('.question-form');

@@ -25,8 +25,8 @@ QUESTION_TYPES = \
 
 QUESTION_CONTENT = {
     'name': 'What is the name of this person?',
-    'year': 'What is the year of study of this person?',
-    'country': 'What is this person country of residence?',
+    'year': 'What is the graduation year of this person?',
+    'country': 'What is the nationality of this person?',
     'major': "What is this person's major?",
     'fname': "What is this person's first name?",
     'lname': "What is this person's last name?",

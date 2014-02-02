@@ -23,7 +23,7 @@
 				  			</label><br>
 				  			{% endfor%}
 			  			{% else %}
-			  				<input ng-model="answer" name="answer" class="answer" type="text" class="form-control" placeholder="Answer me!" autofocus>
+			  				<input ng-model="answer" name="answer" class="answer answer-text" type="text" class="form-control" placeholder="Answer me!" autofocus>
 			  			{% endif %}
 		  				<input type="hidden" name="uid" value="{{question.question_target.jid}}"></input>
 		  				<input type="hidden" name="q_type" value="{{question.question_type.0}}"></input>

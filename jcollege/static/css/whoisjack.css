@@ -174,3 +174,22 @@ table.no-margin {
 .options {
 	padding: 20px 0px;
 }
+
+.levelup-panel > .panel-body{
+	text-align: center;
+	padding: 77px;
+}
+
+.levelup-panel{
+	background: rgb(239, 248, 237);
+	border-color: rgb(83, 169, 63);
+	border-width: 5px;
+}
+
+.answer-text {
+	width: 95%;
+}
+
+.continue {
+	width: 100%;
+}
