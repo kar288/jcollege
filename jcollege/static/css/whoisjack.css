@@ -107,6 +107,12 @@ body {
     margin-bottom: 1px;
 }
 
+.jack-picture {
+    height:auto; 
+    width:auto; 
+    max-width:200px; 
+    max-height:200px;
+}
 .center-message{
 	margin: 0px auto;
 	padding: 20% 0;
