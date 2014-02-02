@@ -114,11 +114,25 @@ def answer_question(request):
 
 
 
+    result['progress'] = get_progress(user)
+
+    level = get_level(user)
+    result['level'] = level
+    result['next_level'] = level+1
+
+
     footer = loader.get_template('objects/resultFooter.html')
     reqContext = RequestContext(request, result)
-    response_data = footer.render(reqContext);
+    response_data_footer = footer.render(reqContext);
 
-    result['footer'] = response_data;
+    result['footer'] = response_data_footer;
+
+    profile = loader.get_template('objects/profile.html')
+    reqContextProfile = RequestContext(request, result)
+    response_data_profile = profile.render(reqContextProfile);
+
+    result['profile'] = response_data_profile;
+
 
     return HttpResponse(json.dumps(result), content_type="application/json")
 

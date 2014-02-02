@@ -28,7 +28,7 @@
 	  				<input type="hidden" name="uid" value="{{question.question_target.jid}}"></input>
 	  				<input type="hidden" name="q_type" value="{{question.question_type.0}}"></input>
 	  				{% csrf_token %}
-	  				<button type="button" class="submit-answer submit-button btn btn-lg btn-default" ng-disabled="!(answer)">submit</button>
+	  				<button type="submit" class="submit-answer submit-button btn btn-lg btn-default" ng-disabled="!(answer)">Submit</button>
 	  			</form>
   			</div>
   		</div>

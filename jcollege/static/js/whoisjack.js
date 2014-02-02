@@ -1,9 +1,13 @@
-$(document).ready(function(){
-	$('.submit-answer').click(submitAnswer);
+$(document).ready(function(){	
+	$('.question-form').submit(submitAnswer)
+	console.log($('.question-form'))
 });
 
-function submitAnswer() {
-	var frm = $('.question-form');
+function submitAnswer(event) {
+	event.preventDefault();
+	var frm = $('.question-form')
+	console.log('submitting form')
+	console.log(frm.serialize())
 	$.ajax({
         type: frm.attr('method'),
         url: '/answer_question/',
@@ -12,6 +16,9 @@ function submitAnswer() {
         	$('.submit-answer').remove()
         	$('.footer-container').append(data.footer);
 			$('.next-question').click(newQuestion)
+			$('.profile-content').empty();
+			console.log(data)
+			$('.profile-content').append(data.profile)
         },
         error: function(data) {
             console.log('bad')
@@ -25,6 +32,7 @@ function newQuestion() {
 		console.log(data.question)
 		$('.question-wrapper').empty()
 		$('.question-wrapper').append(data.question)
-		$('.submit-answer').click(submitAnswer);
+		var frm = $('.question-form');
+		frm.submit(submitAnswer);
 	}); 
 }

@@ -129,3 +129,18 @@ body {
 .panel-footer{
 	text-align: center;
 }
+
+.user-points{
+	width: 100%;
+	margin: 0px;
+	padding: 0px 10px;
+}
+
+.profile-content {
+	text-align: center;
+}
+
+.level-numbers {
+	margin: -20px -15px 0px -15px;
+	font-weight: 900;
+}

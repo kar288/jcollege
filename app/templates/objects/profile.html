@@ -1,12 +1,21 @@
+<h4>
+	Points to next level
+</h4>
 <div class="user-points">
-	{{ level }} <br>
-	Points to next level <br>
 	<div class="progress">
-	  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%">
-	    <span class="sr-only">40% Complete (success)</span>
-	  </div>
+		<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%">
+		    <span class="sr-only">40% Complete (success)</span>
+		</div>
+
 	</div>
-	{{ next_level }} <br>
+	<div class="row level-numbers">
+		<div class="col-sm-1">
+			{{level}}
+		</div>
+		<div class="col-sm-offset-10 col-sm-1">
+			{{next_level}}
+		</div>
+	</div>
 </div>
 <div class="college-points">
 	<ul>
