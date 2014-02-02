@@ -3,6 +3,7 @@ $(document).ready(function(){
 });
 
 function submitAnswer(event) {
+    $('.submit-answer').remove()
 	event.preventDefault();
 	var frm = $('.question-form')
 	$.ajax({
@@ -18,7 +19,6 @@ function submitAnswer(event) {
 				$('.question-wrapper').append(data.levelup)
 				$('.continue').click(newQuestion);
 			}
-        	$('.submit-answer').remove()
         	$('.footer-container').append(data.footer);
 			$('.next-question').click(newQuestion)
 			$('.profile-content').empty();
