@@ -32,9 +32,9 @@ def question_context(request):
     user = get_object_or_404(Student, id= userid)
     context['user'] = user
 
-    level = get_level(user)
-    context['level'] = level
-    context['next_level'] = level+1
+    level = get_level(user)[0]
+    levelName = get_level(user)[1]
+    context['level'] = levelName
     context['progress'] = get_progress(user)
     context['points'] = user.points
     context['question'] = create_question(user, user.college, level)
@@ -95,14 +95,14 @@ def answer_question(request):
     if correct:
         result['result'] = True
 
-        old_level = get_level(user)
+        old_level = get_level(user)[0]
         added_points = dict(QUESTION_TYPES)[ q_type ]
         user.points += added_points
         user.save()
         col = College.objects.filter(name=user.college)[0]
         col.points += added_points
         col.save()
-        new_level = get_level(user)
+        new_level = get_level(user)[0]
 
         result['new_points'] = added_points
         result['new_total'] = user.points
@@ -116,9 +116,9 @@ def answer_question(request):
 
     result['progress'] = get_progress(user)
 
-    level = get_level(user)
+    level = get_level(user)[1]
     result['level'] = level
-    result['next_level'] = level+1
+    # result['next_level'] = level+1
 
 
     footer = loader.get_template('objects/resultFooter.html')

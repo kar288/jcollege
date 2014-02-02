@@ -35,14 +35,28 @@ QUESTION_CONTENT = {
 
 YEARS = ['14', '15', '16']
 
+LEVEL_NAMES = {
+    0: "New Born",
+    1: "Auslander",
+    2: "Peitgen",
+    3: "Lafayetty",
+    4: "Appetito Chef",
+    5: "Nordie",
+    6: "Hey, use jCourse",
+    7: "TOS Bartender",
+    8: "College Master",
+    9: "Jack"
+}
+
 def get_level(st):
     for level in range(len(POINT_TO_LEVEL)):
         if POINT_TO_LEVEL[level] > st.points:
-            return level + 1
-    return len(POINT_TO_LEVEL)
+            return [level + 1, LEVEL_NAMES[level+1]]
+    level = len(POINT_TO_LEVEL)
+    return [level, LEVEL_NAMES[level]]
 
 def get_progress(st):
-    level = get_level(st)
+    level = get_level(st)[0]
     if level <= len(POINT_PER_LEVEL):
         if level <= 1:
             level_before = 0
