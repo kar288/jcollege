@@ -106,3 +106,8 @@ body {
 .question-info-panel {
     margin-bottom: 1px;
 }
+
+.center-message{
+	margin: 0px auto;
+	padding: 20% 0;
+}

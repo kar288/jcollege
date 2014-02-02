@@ -164,3 +164,9 @@ def user_authenticated(request):
     if request.user and request.user.is_authenticated():
         return request.user.username
     return False
+
+def error404(request):
+    return render(request,'pages/404.html')
+
+def error500(request):
+    return render(request,'pages/500.html')
