@@ -41,6 +41,20 @@ def get_level(st):
             return level + 1
     return len(POINT_TO_LEVEL)
 
+def get_progress(st):
+    level = get_level(st)
+    if level <= len(POINT_PER_LEVEL):
+        if level <= 1:
+            level_before = 0
+        else:
+            level_before = POINT_TO_LEVEL[level-2]
+        level_after = POINT_TO_LEVEL[level-1]
+        current_pts = st.points
+        return ((current_pts-level_before+0.0)/(level_after-level_before+0.0)*100.0)
+    else:
+        return 100
+
+
 def create_question(st, college, level):
     context = {}
     students = Student.objects.filter(college=college)

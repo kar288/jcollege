@@ -31,6 +31,9 @@ def question(request):
 
     level = get_level(user)
     context['level'] = level
+    context['next_level'] = level+1
+    context['progress'] = get_progress(user)
+    context['points'] = user.points
     context['question'] = create_question(user, user.college, level)
 
     return render(request, 'pages/question.html', context)
