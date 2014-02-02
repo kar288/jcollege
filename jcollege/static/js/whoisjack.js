@@ -1,5 +1,6 @@
 $(document).ready(function(){	
 	$('.question-form').submit(submitAnswer)
+	$('.points-header').tooltip('show')
 });
 
 function submitAnswer(event) {

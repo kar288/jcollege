@@ -39,6 +39,8 @@ def question_context(request):
     context['points'] = user.points
     context['question'] = create_question(user, user.college, level)
     context['top_players'] = get_top_players(user)
+    if user not in context['top_players']:
+    	context['not_in_top'] = True;
     
     colleges = sorted(College.objects.all(),key=lambda x:x.points, reverse=True)
     lst = []
@@ -112,6 +114,7 @@ def answer_question(request):
     else:
         result['result'] = False
 
+    result['points'] = user.points
 
 
     result['progress'] = get_progress(user)

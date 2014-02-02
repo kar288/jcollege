@@ -81,6 +81,26 @@
                     </tr>
                     {% endif %}
                 {% endfor %}
+                {% if not_in_top %}
+                    <tr>
+                        <td >
+                        </td>
+                        <td class="center-points">
+                            ...
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img class="college-icon" src="{{ user.photourl }}" alt="asd">
+                        </td>
+                        <td>
+                            {{ user.fname }}
+                        </td>
+                        <td>
+                            {{ user.points }}
+                        </td>
+                    </tr>
+                {% endif %}
             </tbody>
         </table>
       </div>
