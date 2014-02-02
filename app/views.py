@@ -176,11 +176,11 @@ def home(request):
 
     l_username = request.POST['user']
     # Uncomment this when testing is done
-    # cn_page = campusnet_login(request.POST['user'], request.POST['pass'])
+    cn_page = campusnet_login(request.POST['user'], request.POST['pass'])
 
-    # if cn_page.find('Wrong username or password') != -1:
-    #     context['error'] = "Wrong username or password!"
-    #     return render(request, "pages/login_page.html", context)
+    if cn_page.find('Wrong username or password') != -1:
+        context['error'] = "Wrong username or password!"
+        return render(request, "pages/home.html", context)
     
     users = Student.objects.filter(username=l_username)
     if len(users) != 1:
