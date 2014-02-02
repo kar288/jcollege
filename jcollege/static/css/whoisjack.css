@@ -144,3 +144,11 @@ body {
 	margin: -20px -15px 0px -15px;
 	font-weight: 900;
 }
+
+.college-icon {
+  height: 15px;
+}
+
+table.no-margin {
+  margin-bottom: 0px;
+}

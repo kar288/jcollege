@@ -6,17 +6,13 @@
 	<div class="col-md-8 question-wrapper">
 		{% include 'objects/questionPanel.html' %}
 	</div>
+
 	<div class="col-md-4">
 		<div class="panel profile-content">
 			{% include 'objects/profile.html' %}
 		</div>
 		
-		<div class="panel">
-			<div class="question-info-panel"><strong>Highscore</strong></div>
-		</div>
-		<div class="panel">
-			{% include 'objects/highscore.html' %}
-		</div>
+		{% include 'objects/highscore.html' %}
 	</div>
 </div>
 {% endblock %}
