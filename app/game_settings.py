@@ -11,7 +11,7 @@ def transform_to_level(PT_PER_LVL):
         r.append(s)
     return r
 
-POINT_PER_LEVEL = [3, 5, 10, 25, 50, 75, 150]
+POINT_PER_LEVEL = [3, 5, 10, 25, 50, 75, 150, 300, 600]
 POINT_TO_LEVEL = transform_to_level(POINT_PER_LEVEL)
 
 QUESTION_TYPES = \
@@ -20,8 +20,8 @@ QUESTION_TYPES = \
     ('country', 2), \
     ('major', 3), \
     ('fname', 5), \
-    ('lname', 5), \
-    ('roommate', 8)]
+    ('lname', 6), \
+    ('roommate', 9)]
 
 QUESTION_CONTENT = {
     'name': 'What is the name of this person?',
