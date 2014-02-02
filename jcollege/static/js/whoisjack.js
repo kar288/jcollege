@@ -3,7 +3,11 @@ $(document).ready(function(){
 });
 
 function submitAnswer(event) {
-    $('.submit-answer').remove()
+	if($('.answer').attr('type') == "text" && $('.answer').val()) {
+    	$('.submit-answer').remove()		
+	} else if ($('input[name=answer]:checked').val()) {
+    	$('.submit-answer').remove()
+	}
 	event.preventDefault();
 	var frm = $('.question-form')
 	$.ajax({
