@@ -7,7 +7,9 @@ urlpatterns = patterns('',
     url(r'^question$', 'app.views.question', name='question'),
     url(r'^about$', 'app.views.about', name='about'),
     url(r'^logout', 'app.views.logout_action', name='logout'),
-    url(r'^answer_question', 'app.views.answer_question', name='answer_question')
+    url(r'^answer_question', 'app.views.answer_question', name='answer_question'),
+    url(r'^new_question', 'app.views.new_question', name='new_question')
+    
 )
 
 handler404 = 'app.views.error404'

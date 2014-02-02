@@ -23,7 +23,7 @@ h3.signin-header{
 }
 
 .home-left {
-	padding: 10% 0;
+	padding: 15% 0;
 	background: rgba(238, 238, 238, 0.80);
 }
 
@@ -116,4 +116,16 @@ body {
 .center-message{
 	margin: 0px auto;
 	padding: 20% 0;
+}
+
+.danger-footer{
+	background: rgba(240, 80, 80, 0.5);
+}
+
+.success-footer{
+	background: rgba(83, 169, 63, 0.5);
+}
+
+.panel-footer{
+	text-align: center;
 }

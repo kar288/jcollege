@@ -1,0 +1,10 @@
+<div class="panel-footer {% if result %}success-footer {% else %} danger-footer {% endif %}">
+	<div class="row">
+		<div class="col-md-8">
+			{% if result %}Right! <h1>+{{new_points}}</h1>{% else %} Wrong! {% endif %}
+		</div>
+		<div class="col-md-4">
+			<button type="button" class="next-question submit-button btn btn-lg btn-default">Next</button>
+		</div>
+	</div>
+</div>

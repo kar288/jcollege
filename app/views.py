@@ -18,8 +18,11 @@ import json
 # Twill for CN login
 from twill import commands
 
-@login_required
-def question(request):
+
+from django.template import loader, RequestContext
+
+
+def question_context(request):
     context = {
         'page': 'question',
         'user_auth': user_authenticated(request)
@@ -35,8 +38,25 @@ def question(request):
     context['progress'] = get_progress(user)
     context['points'] = user.points
     context['question'] = create_question(user, user.college, level)
+    return context;
 
-    return render(request, 'pages/question.html', context)
+@login_required
+def question(request):
+    return render(request, 'pages/question.html', question_context(request))
+
+@login_required
+def new_question(request):
+    context = question_context(request)
+
+    question = loader.get_template('objects/questionPanel.html')
+    reqContext = RequestContext(request, context)
+    response_data = question.render(reqContext);
+
+    result = {}
+    result['question'] = response_data;
+
+    return HttpResponse(json.dumps(result), content_type="application/json")
+
 
 def about(request):
     context = {
@@ -81,6 +101,14 @@ def answer_question(request):
             result['levelup'] = True
     else:
         result['result'] = False
+
+
+
+    footer = loader.get_template('objects/resultFooter.html')
+    reqContext = RequestContext(request, result)
+    response_data = footer.render(reqContext);
+
+    result['footer'] = response_data;
 
     return HttpResponse(json.dumps(result), content_type="application/json")
 
