@@ -19,6 +19,8 @@ function submitAnswer(event) {
 			$('.profile-content').empty();
 			console.log(data.levelup)
 			$('.profile-content').append(data.profile)
+            $('.highscores-panels').empty()
+            $('.highscores-panels').append(data.highscores)
         },
         error: function(data) {
             console.log('bad')
