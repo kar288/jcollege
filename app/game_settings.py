@@ -54,6 +54,11 @@ def get_progress(st):
     else:
         return 100
 
+def get_top_players(student):
+    col_of_student = student.college
+    players = Student.objects.filter(college=col_of_student, points__gt=0)
+    return sorted(players,key=lambda x:x.points, reverse=True)[:10]
+
 
 def create_question(st, college, level):
     context = {}

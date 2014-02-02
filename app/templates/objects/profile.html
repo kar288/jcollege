@@ -1,12 +1,17 @@
-{{ level }} <br>
-Points to next level <br>
-<div class="progress">
-  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%">
-    <span class="sr-only">40% Complete (success)</span>
-  </div>
-</div>
-{{ next_level }} <br>
 <div class="user-points">
+	{{ level }} <br>
+	Points to next level <br>
+	<div class="progress">
+	  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%">
+	    <span class="sr-only">40% Complete (success)</span>
+	  </div>
+	</div>
+	{{ next_level }} <br>
 </div>
 <div class="college-points">
+	<ul>
+	{% for col in top_colleges %}
+	<li>{{ col.name }} ({{ col.points }})</li>
+	{% endfor %}
+	</ul>
 </div>

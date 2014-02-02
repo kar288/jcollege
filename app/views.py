@@ -38,6 +38,17 @@ def question_context(request):
     context['progress'] = get_progress(user)
     context['points'] = user.points
     context['question'] = create_question(user, user.college, level)
+    context['top_players'] = get_top_players(user)
+    
+    colleges = sorted(College.objects.all(),key=lambda x:x.points, reverse=True)
+    lst = []
+    for c in colleges:
+        lst.append({
+            'name': dict(COLLEGES)[c.name],
+            'points': c.points
+        })
+    context['top_colleges'] = lst
+
     return context;
 
 @login_required
@@ -56,7 +67,6 @@ def new_question(request):
     result['question'] = response_data;
 
     return HttpResponse(json.dumps(result), content_type="application/json")
-
 
 def about(request):
     context = {
