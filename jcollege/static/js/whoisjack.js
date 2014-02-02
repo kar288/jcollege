@@ -24,7 +24,8 @@ function submitAnswer(event) {
 			$('.profile-content').empty();
 			$('.profile-content').append(data.profile)
 			$("input").prop('disabled', true);
-
+            $('.highscores-panels').empty()
+            $('.highscores-panels').append(data.highscores)
         },
         error: function(data) {
             console.log('bad')

@@ -40,3 +40,33 @@ class College(models.Model):
 									choices=COLLEGES,
 									default=MERCATOR)
 	points = models.IntegerField(default = 0);
+
+major_list = {
+	'CS': 'Computer Science',
+	'EECS': 'Electrical Engineering and Computer Science',
+	'ECE': 'Electrical and Computer Engineering',
+	'ESS': 'Earth and Space Sciences',
+	'EE': 'Electrical Engineering',
+	'ACM': 'Applied Computanional Mathematics',
+	'PHY': 'Physics',
+	'BCCB': 'Biochemistry and Cell biology',
+	'BCE': 'Biochemical Engineering',
+	'IRB': 'Intercultural Relations and Behaviour',
+	'ISCP': 'Integrated Social and Cognitive Psychology',
+	'IES': 'Integrated Environmental Studies',
+	'ICS': 'Integrated Cultural Studies',
+	'ISS': 'Integrated Social Sciences',
+	'ILME': 'International Logistics Management and Engineering',
+	'CPN': 'Cognitive Psychology and Neuroscience',
+	'MATH': 'Mathematics',
+	'GEM': 'Global Economics and Management',
+	'BIOCHEM': 'Biochemistry',
+	'CHEM': 'Chemistry',
+	'BIOTECH': 'Biotechnology',
+	'BIGSSS': 'Bremen International School of Social Sciences',
+	'IR': 'International Relations',
+	'IMS': 'Information Management and Systems',
+	'IL': 'International Logistics',
+	'BIO/NEURO': 'Biology and Neuroscience',
+	'GH': 'Global Humanities'
+}

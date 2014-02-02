@@ -138,6 +138,23 @@ def answer_question(request):
         response_data_levelup = levelup.render(reqContextProfile);
         result['levelup'] = response_data_levelup
 
+    highscores = loader.get_template('objects/highscore.html')
+    context = {}
+    context['top_players'] = get_top_players(user)
+    colleges = sorted(College.objects.all(),key=lambda x:x.points, reverse=True)
+    lst = []
+    for c in colleges:
+        lst.append({
+            'name': dict(COLLEGES)[c.name],
+            'points': c.points
+        })
+    context['top_colleges'] = lst
+    reqContextProfile = RequestContext(request, context)
+    response_data_highscores = highscores.render(reqContextProfile);
+
+    result['highscores'] = response_data_highscores
+
+
     return HttpResponse(json.dumps(result), content_type="application/json")
 
 def home(request):

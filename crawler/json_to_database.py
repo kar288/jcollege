@@ -56,3 +56,22 @@ list_of_colleges = ['mercator','nordmetall','college-III','krupp']
 
 for college in list_of_colleges:
 	college_to_database(college)
+
+
+MAJOR_TO_MAJOR = {
+	'CS ICS': 'ICS',
+	'CS EECS EE': 'EECS',
+	'ILME IL': 'ILME',
+	'IRB IR': 'IRB'
+}
+
+students = Student.objects.all()
+for st in students:
+  if st.major in MAJOR_TO_MAJOR:
+    st.major = MAJOR_TO_MAJOR[ st.major ]
+    st.save()
+
+for st in students:
+    if st.major in major_list:
+        st.major = major_list[ st.major ]
+        st.save()
