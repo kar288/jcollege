@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from django.db.models import F
 
 # Mimetypes for images
 from mimetypes import guess_type
@@ -93,6 +94,15 @@ def answer_question(request):
     q_type = request.POST['q_type']
     correct = verify_question(user, target, q_type, request.POST['answer'])
 
+    pop_studs = Popularity.objects.filter(stud=target)
+    if len(pop_studs) == 0:
+        pop_stud = Popularity(stud=target, total_questions=1)
+        pop_stud.save()
+    else:
+        pop_stud = pop_studs[0]
+        pop_stud.total_questions = F('total_questions')+1
+        pop_stud.save()
+
     result = {}
     if correct:
         result['result'] = True
@@ -111,6 +121,9 @@ def answer_question(request):
         result['new_total_college'] = col.points
         if old_level != new_level:
             result['levelup'] = True
+
+        pop_stud.correctly_answered = F('correctly_answered')+1
+        pop_stud.save()
     else:
         result['result'] = False
 

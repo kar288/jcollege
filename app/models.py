@@ -41,6 +41,14 @@ class College(models.Model):
 									default=MERCATOR)
 	points = models.IntegerField(default = 0);
 
+class Popularity(models.Model):
+	stud = models.ForeignKey(Student)
+	correctly_answered = models.IntegerField(default=0)
+	total_questions = models.IntegerField(default=1)
+
+	def __unicode__(self):
+		return self.stud.username + " " + str(1.0 * self.correctly_answered / self.total_questions)
+
 major_list = {
 	'CS': 'Computer Science',
 	'EECS': 'Electrical Engineering and Computer Science',
