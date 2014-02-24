@@ -23,14 +23,9 @@ def college_to_database(college_name):
                     majors = majors + major_name + ' '
             if len(majors) != 0:
                 majors = majors[:-1]
-            print majors        
-            username = juser['email']
-            username = username.replace('@jacobs-university.de', '')
-            username = username.replace('.', '')
             password = '1234'
             photourl = juser['photo']
-            photourl = photourl.replace('jpeople.user.jacobs-university.de/utils/images/', 'swebtst01.public.jacobs-university.de/jPeople/image.php?id=')
-            photourl = photourl.replace('.jpg', '')
+            photourl = photourl.replace('jpeople.user.jacobs-university.de/utils/images/', 'ircitweb.irc-it.jacobs-university.de/cnpics_128_intranet/')
             if True:
                 new_juser = Student(jid = jid,\
                     fname = juser['fname'],\
@@ -40,7 +35,7 @@ def college_to_database(college_name):
                     room = juser['room'],\
                     phone = juser['phone'],\
                     country = juser['country'],\
-                    username = username,\
+                    username = juser['account'],\
                     password = password,\
                     is_active = False,\
                     majorinfo = juser['majorinfo'],\
@@ -79,3 +74,4 @@ for st in students:
     if st.major in major_list:
         st.major = major_list[ st.major ]
         st.save()
+

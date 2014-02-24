@@ -42,7 +42,8 @@ jpeople_attr_map = {
 	"deptinfo": "deptinfo",
 	"block": "block",
 	"floor": "floor",
-	"photo": "photo"
+	"photo": "photo",
+	"account": "account",
 }
 
 # end CONFIG
@@ -92,7 +93,6 @@ def search(query):
 
 				# A Directory for the person
 				person_dict = {}
-
 
 
 				for tag in person:
