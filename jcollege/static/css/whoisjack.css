@@ -202,3 +202,7 @@ table.no-margin {
 .center-points {
 	text-align: center;
 }
+
+.panel-score-heading {
+	padding:3px;
+}

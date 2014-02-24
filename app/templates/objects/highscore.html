@@ -1,108 +1,124 @@
 
     <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">College Ratings</h3>
-      </div>
-      <div class="panel-body">
-        <table class="table no-margin">
-            {% with col=top_colleges.0 %}
-                <thead>  
-                  <tr>
-                        <th>
-                            <img class="college-icon" src="{{ STATIC_URL }}images/{{col.name}}.jpg" alt="{{ col.name }}">
-                        </th>
-                        <th>
-                            {{ col.name }}
-                        </th>
-                        <th>
-                            {{ col.points }}
-                        </th> 
-                  </tr>  
-                </thead>
-            {% endwith %}
+        <div class="panel-heading panel-score-heading">
+          <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a href="#college-rating" data-toggle="tab">College Ratings</a></li>
+            <li ><a href="#college-popularity" data-toggle="tab">College Popularity</a></li>
+          </ul>
+        </div>
+        <div class="panel-body">
+            <div class="tab-content">
+              <div class="tab-pane fade in active" id="college-rating">
+                <table class="table no-margin">
+                    {% with col=top_colleges.0 %}
+                        <thead>  
+                          <tr>
+                                <th>
+                                    <img class="college-icon" src="{{ STATIC_URL }}images/{{col.name}}.jpg" alt="{{ col.name }}">
+                                </th>
+                                <th>
+                                    {{ col.name }}
+                                </th>
+                                <th>
+                                    {{ col.points }}
+                                </th> 
+                          </tr>  
+                        </thead>
+                    {% endwith %}
 
-            <tbody>
-                {% for col in top_colleges %}
-                    {% if not forloop.first %}
-                    <tr>
-                        <td>
-                            <img class="college-icon" src="{{ STATIC_URL }}images/{{col.name}}.jpg" alt="{{ col.name }}">
-                        </td>
-                        <td>
-                            {{ col.name }}
-                        </td>
-                        <td>
-                            {{ col.points }}
-                        </td>
-                    </tr>
-                    {% endif %}
-                {% endfor %}
-            </tbody>
-        </table>
+                    <tbody>
+                        {% for col in top_colleges %}
+                            {% if not forloop.first %}
+                            <tr>
+                                <td>
+                                    <img class="college-icon" src="{{ STATIC_URL }}images/{{col.name}}.jpg" alt="{{ col.name }}">
+                                </td>
+                                <td>
+                                    {{ col.name }}
+                                </td>
+                                <td>
+                                    {{ col.points }}
+                                </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+              </div>
+              <div class="tab-pane fade" id="college-popularity">...</div>
+            </div>
       </div>
     </div>
 
 
     <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">User Ratings</h3>
-      </div>
+        <div class="panel-heading panel-score-heading">
+          <ul class="nav nav-tabs nav-justified">
+            <li class="active"><a href="#individual-rating" data-toggle="tab">Individual Ratings</a></li>
+            <li ><a href="#individual-popularity" data-toggle="tab">Individual Popularity</a></li>
+          </ul>
+        </div>
       <div class="panel-body">
-        <table class="table no-margin">
-            {% with player=top_players.0 %}
-                <thead>  
-                    <tr>
-                        <th>
-                            <img class="college-icon" src="{{ player.photourl }}" alt="asd">
-                        </th>
-                        <th>
-                            {{ player.fname }}
-                        </th>
-                        <th>
-                            {{ player.points }}
-                        </th>
-                    </tr>
-                </thead>
-            {% endwith %}
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="individual-rating">
+                <table class="table no-margin">
+                    {% with player=top_players.0 %}
+                        <thead>  
+                            <tr>
+                                <th>
+                                    <img class="college-icon" src="{{ player.photourl }}" alt="asd">
+                                </th>
+                                <th>
+                                    {{ player.fname }}
+                                </th>
+                                <th>
+                                    {{ player.points }}
+                                </th>
+                            </tr>
+                        </thead>
+                    {% endwith %}
 
-            <tbody>
-                {% for player in top_players %}
-                    {% if not forloop.first %}
-                    <tr>
-                        <td>
-                            <img class="college-icon" src="{{ player.photourl }}" alt="asd">
-                        </td>
-                        <td>
-                            {{ player.fname }}
-                        </td>
-                        <td>
-                            {{ player.points }}
-                        </td>
-                    </tr>
-                    {% endif %}
-                {% endfor %}
-                {% if not_in_top %}
-                    <tr>
-                        <td >
-                        </td>
-                        <td class="center-points">
-                            ...
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img class="college-icon" src="{{ user.photourl }}{{photo}}" alt="asd">
-                        </td>
-                        <td>
-                            {{ user.fname }}{{fname}}
-                        </td>
-                        <td>
-                            {{points}}
-                        </td>
-                    </tr>
-                {% endif %}
-            </tbody>
-        </table>
+                    <tbody>
+                        {% for player in top_players %}
+                            {% if not forloop.first %}
+                            <tr>
+                                <td>
+                                    <img class="college-icon" src="{{ player.photourl }}" alt="asd">
+                                </td>
+                                <td>
+                                    {{ player.fname }}
+                                </td>
+                                <td>
+                                    {{ player.points }}
+                                </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                        {% if not_in_top %}
+                            <tr>
+                                <td >
+                                </td>
+                                <td class="center-points">
+                                    ...
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img class="college-icon" src="{{ user.photourl }}{{photo}}" alt="asd">
+                                </td>
+                                <td>
+                                    {{ user.fname }}{{fname}}
+                                </td>
+                                <td>
+                                    {{points}}
+                                </td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="individual-popularity">...</div>
+        </div>
       </div>
     </div>
 </div>
