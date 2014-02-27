@@ -11,8 +11,9 @@ def transform_to_level(PT_PER_LVL):
         r.append(s)
     return r
 
-POINT_PER_LEVEL = [3, 5, 10, 25, 50, 75, 150, 300, 600, 1000000]
+POINT_PER_LEVEL = [3, 5, 7, 15, 25, 50, 75, 150, 300, 600, 1200, 2500, 5000, 10070, 980000]
 POINT_TO_LEVEL = transform_to_level(POINT_PER_LEVEL)
+print POINT_TO_LEVEL
 
 QUESTION_TYPES = \
     [('name', 1), \
@@ -41,16 +42,20 @@ YEARS_NAMES = ['Year 2014', 'Year 2015', 'Year 2016']
 LEVEL_NAMES = {
     0: "No one",
     1: "New Born",
-    2: "Auslander",
-    3: "Peitgen",
-    4: "Lafayettee",
-    5: "Appetito Chef",
-    6: "Nordie",
-    7: "'Hey, use jCourse'",
-    8: "TOS Bartender",
-    9: "College Master",
-    10: "Jack",
-    11: 'Andrei Militaru'
+    2: "Pet Rock",
+    3: "Guy stuck in the elevator",
+    4: "Snoop Lion",
+    5: "Joey from friends",
+    6: "Skrillex",
+    7: "Walter White",
+    8: "Darth Vader",
+    9: "Tim Minchin",
+    10: "Quentin Tarantino",
+    11: "Bob Marley",
+    12: 'Douglas Hofstadter',
+    13: 'Leonardo da Vinci',
+    14: 'Jack',
+    15: 'Jon Lajoie'
 }
 
 def get_level(st):
@@ -178,3 +183,22 @@ def verify_question(user, target, question_type, answer):
         return abs(int(useranswer.room[3:]) - int(target.room[3:])) == 1
     return False
 
+
+# OLD GAME Settings:
+
+# February session
+# POINT_PER_LEVEL = [3, 5, 10, 25, 50, 75, 150, 300, 600, 1000000]
+# LEVEL_NAMES = {
+#     0: "No one",
+#     1: "New Born",
+#     2: "Auslander",
+#     3: "Peitgen",
+#     4: "Lafayettee",
+#     5: "Appetito Chef",
+#     6: "Nordie",
+#     7: "'Hey, use jCourse'",
+#     8: "TOS Bartender",
+#     9: "College Master",
+#     10: "Jack",
+#     11: 'Andrei Militaru'
+# }
