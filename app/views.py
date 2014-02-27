@@ -11,6 +11,7 @@ from mimetypes import guess_type
 from app.models import *
 from app.game_settings import *
 from app.prev_scores import *
+from app.get_statistics import *
 
 import os
 import sys
@@ -43,15 +44,8 @@ def question_context(request):
     context['popular_users'] = get_popular_users()
     if user not in context['top_players']:
     	context['not_in_top'] = True;
-    
-    colleges = sorted(College.objects.all(),key=lambda x:x.points, reverse=True)
-    lst = []
-    for c in colleges:
-        lst.append({
-            'name': dict(COLLEGES)[c.name],
-            'points': c.points
-        })
-    context['top_colleges'] = lst
+    context['top_colleges'] = get_top_colleges()
+    context['popular_colleges'] = get_popular_colleges()
 
     return context;
 
@@ -157,7 +151,9 @@ def answer_question(request):
 
     highscores = loader.get_template('objects/highscore.html')
     context = {}
-    context['top_players'] = get_top_players(user)
+    context['top_players'] = get_top_players()
+    context['popular_users'] = get_popular_users()
+    context['popular_colleges'] = get_popular_colleges()
     context['user'] = user;
     if user not in context['top_players']:
         context['not_in_top'] = True;
@@ -165,16 +161,7 @@ def answer_question(request):
         context['fname'] = user.fname
         context['points'] = user.points;
         context['photo'] = user.photourl
-        print user.fname, user.points, user.photourl
-
-    colleges = sorted(College.objects.all(),key=lambda x:x.points, reverse=True)
-    lst = []
-    for c in colleges:
-        lst.append({
-            'name': dict(COLLEGES)[c.name],
-            'points': c.points
-        })
-    context['top_colleges'] = lst
+    context['top_colleges'] = get_top_colleges()
     reqContextProfile = RequestContext(request, context)
     response_data_highscores = highscores.render(reqContextProfile);
 

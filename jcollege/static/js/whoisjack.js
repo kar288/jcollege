@@ -19,6 +19,11 @@ function submitAnswer(event) {
 	}
 	event.preventDefault();
 	var frm = $('.question-form')
+
+    // Tab problems
+    var col_popularity_tab = $('a[href="#college-popularity"]').parent().hasClass('active')
+    var std_popularity_tab = $('a[href="#individual-popularity"]').parent().hasClass('active')
+
 	$.ajax({
         type: frm.attr('method'),
         url: '/answer_question/',
@@ -39,6 +44,13 @@ function submitAnswer(event) {
 			$("input").prop('disabled', true);
             $('.highscores-panels').empty()
             $('.highscores-panels').append(data.highscores)
+
+            if (col_popularity_tab) {
+                $('a[href="#college-popularity"]').tab('show');
+            }
+            if (std_popularity_tab) {
+                $('a[href="#individual-popularity"]').tab('show');
+            }
         },
         error: function(data) {
             console.log('bad')
