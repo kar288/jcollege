@@ -17,6 +17,7 @@ POINT_TO_LEVEL = transform_to_level(POINT_PER_LEVEL)
 QUESTION_TYPES = \
     [('name', 1), \
     ('year', 1), \
+    ('college', 1), \
     ('country', 2), \
     ('major', 3), \
     ('fname', 5), \
@@ -25,6 +26,7 @@ QUESTION_TYPES = \
 
 QUESTION_CONTENT = {
     'name': 'Who\'s this?',
+    'college': 'Where does he/she live?',
     'year': 'In which year are we getting rid of him/her?',
     'country': 'Where is (s)he coming from?',
     'major': "What is (s)he studying?",
@@ -73,7 +75,8 @@ def get_progress(st):
 
 def create_question(st, college, level):
     context = {}
-    students = Student.objects.filter(college=college)
+    # students = Student.objects.filter(college=college)
+    students = Student.objects.all()
 
     rr = random.randrange(level)
     question_type = QUESTION_TYPES[ min([rr, len(QUESTION_TYPES)-1]) ]
@@ -85,6 +88,9 @@ def create_question(st, college, level):
     if question_type[0] == 'name':
         target = allstudents[0]
         choices = [(t.fname + " " + t.lname) for t in allstudents[0:4]]
+    elif question_type[0] == 'college':
+        target = allstudents[0]
+        choices = ['Mercator', 'Nordmetall', 'College-III', 'Krupp']
     elif question_type[0] == 'year':
         for t in allstudents:
             if t.year in YEARS:
@@ -145,6 +151,8 @@ def create_question(st, college, level):
 def verify_question(user, target, question_type, answer):
     if question_type == 'name':
         return (target.fname + " " + target.lname == answer)
+    elif question_type == 'college':
+        return (target.college == answer[0])
     elif question_type == 'year':
         return ("Year 20" + target.year == answer)
     elif question_type == 'country':
