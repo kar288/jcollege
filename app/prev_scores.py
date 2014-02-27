@@ -23,9 +23,7 @@ def get_highscores_people(students):
 def get_highscores_colleges(colleges):
     sorted_colleges = sorted(colleges, key=lambda x: x['points'], reverse=True)
     colleges_list = []
-    print dict(COLLEGES)
     for col in sorted_colleges:
-        print dict(COLLEGES)[ col['name'] ]
         colleges_list.append({
             'name': dict(COLLEGES)[ col['name'] ],
             'points': col['points']
