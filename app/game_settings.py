@@ -50,12 +50,13 @@ LEVEL_NAMES = {
     7: "Walter White",
     8: "Darth Vader",
     9: "Tim Minchin",
-    10: "Quentin Tarantino",
-    11: "Bob Marley",
-    12: 'Douglas Hofstadter',
-    13: 'Leonardo da Vinci',
-    14: 'Jack',
-    15: 'Jon Lajoie'
+    10: "Charlie Chaplin",
+    11: "Quentin Tarantino",
+    12: "Bob Marley",
+    13: 'Douglas Hofstadter',
+    14: 'Leonardo da Vinci',
+    15: 'Jack',
+    16: 'Jon Lajoie'
 }
 
 def get_level(st):

@@ -150,10 +150,15 @@ body {
 .profile-content {
 	text-align: center;
 }
+.user-points .progress {
+    margin-bottom: 0px;
+}
 
 .level-numbers {
-	margin: -20px -15px 0px -15px;
-	font-weight: 900;
+	/*margin: -20px -15px 0px -15px;
+	font-weight: 900;*/
+    text-align: left;
+    margin-bottom: 10px;
 }
 
 .college-icon {
@@ -214,4 +219,8 @@ table.no-margin {
 }
 .panel-score-heading {
 	padding:3px;
+}
+
+.current-level {
+    float: none;
 }
