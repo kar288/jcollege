@@ -3,8 +3,11 @@
 
 {% block content %}
 <div class="question-content row">
-	<div class="col-md-8 question-wrapper">
-		{% include 'objects/questionPanel.html' %}
+	<div class="col-md-8">
+		{% include 'objects/timerPanel.html' %}
+		<div class="question-wrapper">
+			{% include 'objects/questionPanel.html' %}
+		</div>
 	</div>
 
 	<div class="col-md-4">

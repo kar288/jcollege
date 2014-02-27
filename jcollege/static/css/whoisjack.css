@@ -87,6 +87,11 @@ body {
 
 /* QUESTION */
 
+.timer-panel {
+    width: 95%;
+    margin: 0px auto 20px auto;
+}
+
 .question-panel {
     width: 95%;
     margin: 0 auto;
