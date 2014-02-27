@@ -113,7 +113,10 @@ for x in pops[0:50]:
   print x.stud.fname, x.stud.lname, x.total_questions, confidence(x.correctly_answered, x.total_questions - x.correctly_answered)
 
 # get pops based on college
-pops = sorted([p for p in Popularity.objects.filter(college="M")], key= lambda x: confidence(x.correctly_answered, x.total_questions - x.correctly_answered), reverse=True)
+pops = sorted([p for p in Popularity.objects.filter(stud__college="K")], key= lambda x: confidence(x.correctly_answered, x.total_questions - x.correctly_answered), reverse=True)
+# and print them with XXX between them
+for x in pops:
+  print(x.stud.fname + " " + x.stud.lname + " " + str(x.total_questions) + " " + str(confidence(x.correctly_answered, x.total_questions - x.correctly_answered)) + "XXX"),
 
 
 # YEAR averages
