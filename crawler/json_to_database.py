@@ -25,7 +25,7 @@ def college_to_database(college_name):
                 majors = majors[:-1]
             password = '1234'
             photourl = juser['photo']
-            photourl = photourl.replace('jpeople.user.jacobs-university.de/utils/images/', 'ircitweb.irc-it.jacobs-university.de/cnpics_128_intranet/')
+            photourl = photourl.replace('jpeople.user.jacobs-university.de/utils/images/', 's3-eu-west-1.amazonaws.com/whoisjack/users/')
             if True:
                 new_juser = Student(jid = jid,\
                     fname = juser['fname'],\
