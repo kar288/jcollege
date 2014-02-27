@@ -6,12 +6,20 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="/home">WhoIsjAck</a>
+    <a class="navbar-brand" href="/home">WhoIsJack</a>
   </div>
 
   <ul class="nav navbar-nav">
-    <li {% if page == "question" %} class="active" {% endif %}><a href="/question">PLAY</a></li>
-    <li {% if page == "allscores" %} class="active" {% endif %}><a href="/allscores">All time scores</a></li>
+    <li {% if page == "question" %} class="active" {% endif %}>
+      <a href="/question">
+        PLAY
+      </a>
+    </li>
+    <li {% if page == "allscores" %} class="active" {% endif %}>
+      <a href="/allscores">
+        SCORES
+      </a>
+    </li>
   </ul>
 
   {% if user_auth %}
