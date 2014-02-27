@@ -6,8 +6,3 @@ local_settings.py
 venv
 staticfiles
 .DS_Store
-
-mercator.json
-college-III.json
-nordmetall.json
-krupp.json
