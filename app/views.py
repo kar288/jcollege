@@ -39,7 +39,8 @@ def question_context(request):
     context['progress'] = get_progress(user)
     context['points'] = user.points
     context['question'] = create_question(user, user.college, level)
-    context['top_players'] = get_top_players(user)
+    context['top_players'] = get_top_players()
+    context['popular_users'] = get_popular_users()
     if user not in context['top_players']:
     	context['not_in_top'] = True;
     
