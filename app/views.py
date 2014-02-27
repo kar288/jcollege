@@ -10,8 +10,8 @@ from mimetypes import guess_type
 # App Models
 from app.models import *
 from app.game_settings import *
+from app.prev_scores import *
 
-# 
 import os
 import sys
 import json
@@ -224,6 +224,16 @@ def home(request):
     context['error'] = "Invalid login! Please try again!"
     return render(request, "pages/home.html", context)
 
+def allscores(request):
+    context= {
+        'page': 'allscores',
+        'sessions': PREV_SCORES
+    }
+
+    return render(request, "pages/allscores.html", context)
+
+
+# HELPER Classes
 @login_required
 def logout_action(request):
     if request.user:

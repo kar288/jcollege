@@ -9,5 +9,5 @@
     8.1 fix usernames (DONE!)
     8.2 people without picture can login (DONE!)
     8.3 LDAP pictures (DONE!)
-9. bugfix: answer questions only about people who have a picture
+9. bugfix: answer questions only about people who have a picture (NO USE ANYMORE)
 10. fix logo

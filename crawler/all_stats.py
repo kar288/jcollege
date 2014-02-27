@@ -9,6 +9,7 @@ stds = []
 for st in students:
     stds.append( {
         'name': st.fname + ' ' + st.lname,
+        'jid': st.jid,
         'points': st.points
     })
 

@@ -1,0 +1,117 @@
+{% extends 'pages/menuBase.html' %}
+
+{% block content %}
+    <div class="row">
+        {% for session in sessions %}
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">{{ session.name }}</h3>
+                  </div>
+                  <div class="panel-body">
+                    From: {{ session.time_start }}
+                    <br>
+                    To: {{ session.time_end }}
+                  </div>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">College Ratings</h3>
+                  </div>
+                  <div class="panel-body">
+                    <table class="table no-margin">
+                        {% with col=session.colleges.0 %}
+                            <thead>  
+                              <tr>
+                                    <th>
+                                        <img class="college-icon" src="{{ STATIC_URL }}images/{{col.name}}.jpg" alt="{{ col.name }}">
+                                    </th>
+                                    <th>
+                                        {{ col.name }}
+                                    </th>
+                                    <th>
+                                        {{ col.points }}
+                                    </th> 
+                              </tr>  
+                            </thead>
+                        {% endwith %}
+
+                        <tbody>
+                            {% for col in session.colleges %}
+                                {% if not forloop.first %}
+                                <tr>
+                                    <td>
+                                        <img class="college-icon" src="{{ STATIC_URL }}images/{{col.name}}.jpg" alt="{{ col.name }}">
+                                    </td>
+                                    <td>
+                                        {{ col.name }}
+                                    </td>
+                                    <td>
+                                        {{ col.points }}
+                                    </td>
+                                </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">User Ratings</h3>
+              </div>
+              <div class="panel-body scrollable-table">
+                <table class="table no-margin">
+                    {% with player=session.students.0 %}
+                        <thead>  
+                            <tr>
+                                <th>
+                                    {{ forloop.counter }}
+                                </th>
+                                <th>
+                                    <img class="college-icon" src="{{ player.student.photourl }}" alt="asd">
+                                </th>
+                                <th>
+                                    {{ player.student.fname }}
+                                </th>
+                                <th>
+                                    {{ player.points }}
+                                </th>
+                            </tr>
+                        </thead>
+                    {% endwith %}
+
+                    <tbody>
+                        {% for player in session.students %}
+                            {% if not forloop.first %}
+                            <tr>
+                                <td>
+                                    {{ forloop.counter }}
+                                </td>
+                                <td>
+                                    <img class="college-icon" src="{{ player.student.photourl }}" alt="asd">
+                                </td>
+                                <td>
+                                    {{ player.student.fname }}
+                                </td>
+                                <td>
+                                    {{ player.points }}
+                                </td>
+                            </tr>
+                            {% endif %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+              </div>
+            </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

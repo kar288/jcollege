@@ -203,6 +203,10 @@ table.no-margin {
 	text-align: center;
 }
 
+.scrollable-table {
+    height: 180px;
+    overflow: auto;
+}
 .panel-score-heading {
 	padding:3px;
 }
