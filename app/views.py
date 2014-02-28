@@ -41,11 +41,12 @@ def question_context(request):
     context['points'] = user.points
     context['question'] = create_question(user, user.college, level)
     context['top_players'] = get_top_players()
-    context['popular_users'] = get_popular_users()
+    popularities = Popularity.objects.filter(total_questions__gt=0)
+    context['popular_users'] = get_popular_users(popularities)
+    context['popular_colleges'] = get_popular_colleges(popularities)
     if user not in context['top_players']:
     	context['not_in_top'] = True;
     context['top_colleges'] = get_top_colleges()
-    context['popular_colleges'] = get_popular_colleges()
 
     return context;
 
@@ -93,10 +94,9 @@ def answer_question(request):
     if len(pop_studs) == 0:
         pop_stud = Popularity(stud=target, total_questions=1)
         pop_stud.save()
+        pop_studs = Popularity.objects.filter(stud=target)
     else:
-        pop_stud = pop_studs[0]
-        pop_stud.total_questions = F('total_questions')+1
-        pop_stud.save()
+        pop_studs.update(total_questions=F('total_questions') + 1)
 
     result = {}
     if correct:
@@ -117,8 +117,7 @@ def answer_question(request):
         if old_level != new_level:
             result['levelup'] = True
 
-        pop_stud.correctly_answered = F('correctly_answered')+1
-        pop_stud.save()
+        pop_studs.update(correctly_answered=F('correctly_answered') + 1)
     else:
         result['result'] = False
 
@@ -152,8 +151,9 @@ def answer_question(request):
     highscores = loader.get_template('objects/highscore.html')
     context = {}
     context['top_players'] = get_top_players()
-    context['popular_users'] = get_popular_users()
-    context['popular_colleges'] = get_popular_colleges()
+    popularities = Popularity.objects.filter(total_questions__gt=0)
+    context['popular_users'] = get_popular_users(popularities)
+    context['popular_colleges'] = get_popular_colleges(popularities)
     context['user'] = user;
     if user not in context['top_players']:
         context['not_in_top'] = True;

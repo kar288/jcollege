@@ -82,11 +82,11 @@ def get_progress(st):
 def create_question(st, college, level):
     context = {}
     # students = Student.objects.filter(college=college)
-    students = Student.objects.all()
+    allstudents = [st for st in Student.objects.exclude(id=st.id)]
 
     rr = random.randrange(level)
     question_type = QUESTION_TYPES[ min([rr, len(QUESTION_TYPES)-1]) ]
-    allstudents = [st for st in students.exclude(id=st.id)]
+
     random.shuffle(allstudents)
     target = None
 

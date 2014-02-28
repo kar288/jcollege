@@ -52,10 +52,10 @@ list_of_colleges = ['mercator','nordmetall','college-III','krupp']
 for college in list_of_colleges:
     college_to_database(college)
 
-College(name="M").save()
-College(name="K").save()
-College(name="C").save()
-College(name="N").save()
+# College(name="M").save()
+# College(name="K").save()
+# College(name="C").save()
+# College(name="N").save()
 
 MAJOR_TO_MAJOR = {
     'CS ICS': 'ICS',

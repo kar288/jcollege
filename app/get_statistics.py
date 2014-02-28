@@ -31,8 +31,7 @@ def confidence(ups, downs):
         return _confidence(ups, downs)
 
 
-def get_popular_users():
-    players = Popularity.objects.filter(total_questions__gt=0)
+def get_popular_users(players):
     pop_studs = sorted(players,key=lambda x:confidence(x.correctly_answered, x.total_questions - x.correctly_answered), reverse=True)
     pop_list = []
     for p in pop_studs[:5]:
@@ -42,8 +41,7 @@ def get_popular_users():
         })
     return pop_list
 
-def get_popular_colleges():
-    players = Popularity.objects.filter(total_questions__gt=0)
+def get_popular_colleges(players):
     college_popularity = {
         'M': {
             'correctly_answered': 0,
