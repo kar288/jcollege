@@ -41,9 +41,10 @@ def question_context(request):
     context['points'] = user.points
     context['question'] = create_question(user, user.college, level)
     context['top_players'] = get_top_players()
-    popularities = Popularity.objects.filter(total_questions__gt=0)
-    context['popular_users'] = get_popular_users(popularities)
-    context['popular_colleges'] = get_popular_colleges(popularities)
+    # UNCOMMENT THIS FOR POPULARITY TAB
+    # popularities = Popularity.objects.filter(total_questions__gt=0)
+    # context['popular_users'] = get_popular_users(popularities)
+    # context['popular_colleges'] = get_popular_colleges(popularities)
     if user not in context['top_players']:
     	context['not_in_top'] = True;
     context['top_colleges'] = get_top_colleges()
@@ -151,9 +152,10 @@ def answer_question(request):
     highscores = loader.get_template('objects/highscore.html')
     context = {}
     context['top_players'] = get_top_players()
-    popularities = Popularity.objects.filter(total_questions__gt=0)
-    context['popular_users'] = get_popular_users(popularities)
-    context['popular_colleges'] = get_popular_colleges(popularities)
+    # UNCOMMENT THIS FOR POPULARITY TAB
+    # popularities = Popularity.objects.filter(total_questions__gt=0)
+    # context['popular_users'] = get_popular_users(popularities)
+    # context['popular_colleges'] = get_popular_colleges(popularities)
     context['user'] = user;
     if user not in context['top_players']:
         context['not_in_top'] = True;

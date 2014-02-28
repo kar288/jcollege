@@ -3,7 +3,9 @@
         <div class="panel-heading panel-score-heading">
           <ul class="nav nav-tabs nav-justified">
             <li class="active"><a href="#college-rating" data-toggle="tab">College Ratings</a></li>
-            <li ><a href="#college-popularity" data-toggle="tab">College Popularity</a></li>
+            {% if popular_colleges %}
+                <li ><a href="#college-popularity" data-toggle="tab">College Popularity</a></li>
+            {% endif %}
           </ul>
         </div>
         <div class="panel-body">
@@ -45,6 +47,7 @@
                     </tbody>
                 </table>
               </div>
+              {% if popular_colleges %}
               <div class="tab-pane" id="college-popularity">
                 <table class="table no-margin">
                     {% with col=popular_colleges.0 %}
@@ -82,6 +85,7 @@
                     </tbody>
                 </table>
               </div>
+              {% endif %}
             </div>
       </div>
     </div>
@@ -91,7 +95,9 @@
         <div class="panel-heading panel-score-heading">
           <ul class="nav nav-tabs nav-justified">
             <li class="active"><a href="#individual-rating" data-toggle="tab">Individual Ratings</a></li>
-            <li ><a href="#individual-popularity" data-toggle="tab">Individual Popularity</a></li>
+            {% if popular_users %}
+                <li ><a href="#individual-popularity" data-toggle="tab">Individual Popularity</a></li>
+            {% endif %}
           </ul>
         </div>
       <div class="panel-body">
@@ -153,6 +159,7 @@
                     </tbody>
                 </table>
             </div>
+            {% if popular_users %}
             <div class="tab-pane" id="individual-popularity">
                 <table class="table no-margin">
                     {% with player=popular_users.0 %}
@@ -190,6 +197,7 @@
                     </tbody>
                 </table>
             </div>
+            {% endif %}
         </div>
       </div>
     </div>
