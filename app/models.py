@@ -49,6 +49,23 @@ class Popularity(models.Model):
 	def __unicode__(self):
 		return self.stud.username + " " + str(1.0 * self.correctly_answered / self.total_questions)
 
+class TopCollege(models.Model):
+	college = models.ForeignKey(College)
+	rank = models.IntegerField(default=4)
+	correctly_answered = models.IntegerField(default=0)
+	total_questions = models.IntegerField(default=1)
+
+class TopStudent(models.Model):
+	student = models.ForeignKey(Student)
+	rank = models.IntegerField(default=5)
+	correctly_answered = models.IntegerField(default=0)
+	total_questions = models.IntegerField(default=1)
+
+class TopRankings(models.Model):
+	colleges = models.ManyToManyField(TopCollege)
+	students = models.ManyToManyField(TopStudent)
+	at_time = models.DateTimeField(auto_now=True)
+
 major_list = {
 	'CS': 'Computer Science',
 	'EECS': 'Electrical Engineering and Computer Science',

@@ -43,8 +43,10 @@ def question_context(request):
     context['top_players'] = get_top_players()
     # UNCOMMENT THIS FOR POPULARITY TAB
     # popularities = Popularity.objects.filter(total_questions__gt=0)
-    # context['popular_users'] = get_popular_users(popularities)
-    # context['popular_colleges'] = get_popular_colleges(popularities)
+    if random.randint(0,200) == 0:
+        remake_popularity()
+    context['popular_users'] = get_popular_users()
+    context['popular_colleges'] = get_popular_colleges()
     if user not in context['top_players']:
     	context['not_in_top'] = True;
     context['top_colleges'] = get_top_colleges()
@@ -154,8 +156,11 @@ def answer_question(request):
     context['top_players'] = get_top_players()
     # UNCOMMENT THIS FOR POPULARITY TAB
     # popularities = Popularity.objects.filter(total_questions__gt=0)
-    # context['popular_users'] = get_popular_users(popularities)
-    # context['popular_colleges'] = get_popular_colleges(popularities)
+    if random.randint(0,200) == 0:
+        remake_popularity()
+    context['popular_users'] = get_popular_users()
+    context['popular_colleges'] = get_popular_colleges()
+
     context['user'] = user;
     if user not in context['top_players']:
         context['not_in_top'] = True;
