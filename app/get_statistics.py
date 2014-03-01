@@ -1,10 +1,11 @@
 
 from app.models import *
+from app.game_settings import *
 from math import sqrt
 
 def get_top_players():
     players = Student.objects.filter(points__gt=0)
-    return sorted(players,key=lambda x:x.points, reverse=True)[:5]
+    return sorted(players,key=lambda x:x.points, reverse=True)[:MAX_LEVEL]
 
 def get_top_colleges():
     colleges = sorted(College.objects.all(),key=lambda x:x.points, reverse=True)
@@ -108,7 +109,7 @@ def remake_popular_users(ranking, players):
     pop_studs = sorted(players,key=lambda x:confidence(x.correctly_answered, x.total_questions - x.correctly_answered), reverse=True)
     pop_list = []
     r = 1
-    for p in pop_studs[:5]:
+    for p in pop_studs[:15]:
         if p.total_questions > 0:
             top_student = TopStudent(student=p.stud,
                 rank=r,

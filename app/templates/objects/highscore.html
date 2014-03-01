@@ -141,7 +141,7 @@
                                 <td >
                                 </td>
                                 <td class="center-points">
-                                    ...
+                                    ... {% if not top_players_max_level %} Level up to see more {% endif %}
                                 </td>
                             </tr>
                             <tr>
@@ -155,6 +155,16 @@
                                     {{points}}
                                 </td>
                             </tr>
+                        {% else %}
+                            {% if not top_players_max_level %}
+                                <tr>
+                                    <td >
+                                    </td>
+                                    <td class="center-points">
+                                        ... Level up to see more 
+                                    </td>
+                                </tr>
+                            {% endif %}
                         {% endif %}
                     </tbody>
                 </table>
@@ -194,6 +204,15 @@
                             </tr>
                             {% endif %}
                         {% endfor %}
+                        {% if not max_level %}
+                            <td>
+                            </td>
+                            <td>
+                                Level Up to see more
+                            </td>
+                            <td>
+                            </td>
+                        {% endif %}
                     </tbody>
                 </table>
             </div>

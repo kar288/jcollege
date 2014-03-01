@@ -13,7 +13,7 @@ def transform_to_level(PT_PER_LVL):
 
 POINT_PER_LEVEL = [3, 5, 7, 15, 25, 50, 75, 150, 300, 600, 1200, 2500, 5000, 10070, 980000]
 POINT_TO_LEVEL = transform_to_level(POINT_PER_LEVEL)
-print POINT_TO_LEVEL
+MAX_LEVEL = len(POINT_PER_LEVEL)
 
 QUESTION_TYPES = \
     [('name', 1), \

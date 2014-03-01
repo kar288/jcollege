@@ -40,12 +40,15 @@ def question_context(request):
     context['progress'] = get_progress(user)
     context['points'] = user.points
     context['question'] = create_question(user, user.college, level)
-    context['top_players'] = get_top_players()
+    context['top_players'] = get_top_players()[0:min(level+3,MAX_LEVEL)]
+    context['top_players_max_level'] = min(level+3,MAX_LEVEL) == MAX_LEVEL
     # UNCOMMENT THIS FOR POPULARITY TAB
     # popularities = Popularity.objects.filter(total_questions__gt=0)
     if random.randint(0,200) == 0:
         remake_popularity()
-    context['popular_users'] = get_popular_users()
+    context['popular_users'] = get_popular_users()[0:level]
+    if level == MAX_LEVEL:
+        context['max_level'] = True
     context['popular_colleges'] = get_popular_colleges()
     if user not in context['top_players']:
     	context['not_in_top'] = True;
@@ -153,13 +156,16 @@ def answer_question(request):
 
     highscores = loader.get_template('objects/highscore.html')
     context = {}
-    context['top_players'] = get_top_players()
+    level = get_level(user)[0]
+    context['top_players'] = get_top_players()[0:min(level+3,MAX_LEVEL)]
+    context['top_players_max_level'] = min(level+3,MAX_LEVEL) == MAX_LEVEL
     # UNCOMMENT THIS FOR POPULARITY TAB
     # popularities = Popularity.objects.filter(total_questions__gt=0)
     if random.randint(0,200) == 0:
         remake_popularity()
-    context['popular_users'] = get_popular_users()
+    context['popular_users'] = get_popular_users()[0:level]
     context['popular_colleges'] = get_popular_colleges()
+    context['max_level'] = (level == MAX_LEVEL)
 
     context['user'] = user;
     if user not in context['top_players']:
