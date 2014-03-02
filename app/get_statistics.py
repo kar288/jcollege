@@ -109,7 +109,7 @@ def remake_popular_users(ranking, players):
     pop_studs = sorted(players,key=lambda x:confidence(x.correctly_answered, x.total_questions - x.correctly_answered), reverse=True)
     pop_list = []
     r = 1
-    for p in pop_studs[:15]:
+    for p in pop_studs[:MAX_LEVEL]:
         if p.total_questions > 0:
             top_student = TopStudent(student=p.stud,
                 rank=r,
