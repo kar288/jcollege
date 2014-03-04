@@ -2,6 +2,7 @@
 from app.models import *
 
 import random
+import math
 
 def transform_to_level(PT_PER_LVL):
     r = []
@@ -11,14 +12,14 @@ def transform_to_level(PT_PER_LVL):
         r.append(s)
     return r
 
-POINT_PER_LEVEL = [3, 5, 7, 15, 25, 50, 75, 150, 300, 600, 1200, 2500, 5000, 10070, 980000]
+POINT_PER_LEVEL = [6, 12, 22, 30, 50, 80, 100, 200, 500, 800, 1200, 2000, 5000, 10000, 980000]
 POINT_TO_LEVEL = transform_to_level(POINT_PER_LEVEL)
 MAX_LEVEL = len(POINT_PER_LEVEL)
 
 QUESTION_TYPES = \
     [('name', 1), \
     ('year', 1), \
-    ('college', 1), \
+    # ('college', 1), \
     ('country', 2), \
     ('major', 3), \
     ('fname', 5), \
@@ -27,7 +28,7 @@ QUESTION_TYPES = \
 
 QUESTION_CONTENT = {
     'name': 'Who\'s this?',
-    'college': 'Where does he/she live?',
+    # 'college': 'Where does he/she live?',
     'year': 'In which year are we getting rid of him/her?',
     'country': 'Where is (s)he coming from?',
     'major': "What is (s)he studying?",
@@ -38,9 +39,9 @@ QUESTION_CONTENT = {
 
 SPECIAL_QUESTION_CONTENT = \
     [('color', 2), \
-    ('bring-on-island', 3), \
     ('alcohol-type', 2), \
     ('fav-food', 2), \
+    ('bring-on-island', 3), \
     ('bremen-bar', 3), \
     ('professor', 5), \
     ('fav-movie', 5), \
@@ -54,12 +55,14 @@ SPECIAL_QUESTION_CONTENT = \
     ('toy', 10), \
     ('dream-job', 10), \
     ('future-plans', 10)]
+PROPOSE_QUESTION_POINTS = 50
+TOTAL_NR_SPECIAL_QUESTIONS = len(SPECIAL_QUESTION_CONTENT)
 
 SPECIAL_QUESTION_QUESTION = {
     'color': "What's his/her favorite color?",
-    'bring-on-island': "What would he/she bring on a deserted island?",
     'alcohol-type': "What is his/her favorite alcohol type?",
     'fav-food': "What is his/her favorite food?",
+    'bring-on-island': "What would he/she bring on a deserted island?",
     'bremen-bar': "What is his/her favorite bremen bar?",
     'professor': "What is his/her favorite professor at Jacobs?",
     'fav-movie': "What is his/her favorite movie?",
@@ -77,9 +80,9 @@ SPECIAL_QUESTION_QUESTION = {
 
 SPECIAL_QUESTION_RESEARCH = {
     'color': "What's YOUR favorite color?",
-    'bring-on-island': "What would YOU bring on a deserted island?",
     'alcohol-type': "What's YOUR favorite alcohol type?",
     'fav-food': "What is YOUR favorite food?",
+    'bring-on-island': "What would YOU bring on a deserted island?",
     'bremen-bar': "What's YOUR favorite bremen bar?",
     'professor': "What's YOUR favorite professor at Jacobs?",
     'fav-movie': "What's YOUR favorite movie?",
@@ -138,11 +141,6 @@ def get_progress(st):
     else:
         return 100
 
-def ask_question(nr_q_ans, level):
-    if level <= 1:
-        return False
-    return random.random() < (1.0 / (nr_q_ans + 3 * (level-1) / 2))
-
 def available_special_questions(college, level):
     qs = SpecialQuestionAnswer.objects.filter(college=college)
     q_available = []
@@ -152,63 +150,101 @@ def available_special_questions(college, level):
             q_available.append( qtype )
     return q_available
 
+def get_special_questions_showed(level):
+    alpha = level / MAX_LEVEL
+    raw_showed = (1.0 - alpha) * 1 + alpha * TOTAL_NR_SPECIAL_QUESTIONS
+    return math.ceil(raw_showed)
+
+def is_personal_question(level):
+    alpha = 1.0 * level / MAX_LEVEL
+    random_coeff = (1.0 - alpha) * 0.5 + alpha * 0.9
+    return random.random() < random_coeff
+
+def is_propose_question():
+    return random.random() < (1.0 / 1000)
+
+def should_ask_question(nr_q_ans, nr_q_avail, level):
+    if nr_q_avail == 0:
+        return True
+    coeff = 2
+    if nr_q_ans > nr_q_avail:
+        coeff += nr_q_ans - nr_q_avail
+    for i in range(3):
+        if level + i <= MAX_LEVEL:
+            if nr_q_ans > get_special_questions_showed(level + i):
+                coeff += 1
+
+    return random.random() < (1.0 / coeff)
+
+def create_personal_question(st, college, level):
+    context = {}
+    # Create personal quertion type:
+    q_ans = SpecialQuestionAnswer.objects.filter(student=st)
+    q_available = available_special_questions(college, level)
+    if should_ask_question(len(q_ans), len(q_available), level):
+        q_type_selected = ""
+        answered_questions_types = [q.qtype for q in q_ans]
+        unanswered_questions_types = []
+        for qtype, pts in SPECIAL_QUESTION_CONTENT:
+            if not qtype in answered_questions_types:
+                unanswered_questions_types.append( qtype )
+        for i in range(len(unanswered_questions_types)):
+            if len(unanswered_questions_types) == i+1 or random.random() < 0.5:
+                q_type_selected = unanswered_questions_types[i]
+            if q_type_selected != "":
+                break
+
+        if q_type_selected != "":
+            context['question_type'] = (q_type_selected, dict(SPECIAL_QUESTION_CONTENT)[q_type_selected])
+            context['question_content'] = SPECIAL_QUESTION_RESEARCH[ q_type_selected ]
+            context['question_target'] = st
+    else:
+        if len(q_available) > 0:
+            q_index = random.randrange(min(int(level*1.5), len(q_available)))
+            q_type_selected = SPECIAL_QUESTION_CONTENT[q_index][0]
+
+            all_answers = [x for x in SpecialQuestionAnswer.objects.filter(college=college, qtype=q_type_selected)]
+            random.shuffle(all_answers)
+
+            target = all_answers[0]
+            if target.student == st:
+                target = all_answers[1]
+            choices = [target.answer]
+            for ans in all_answers:
+                if not ans.answer in choices:
+                    choices.append(ans.answer)
+                if len(choices) == 4:
+                    break
+
+            context['question_type'] = (q_type_selected, dict(SPECIAL_QUESTION_CONTENT)[q_type_selected])
+            context['question_content'] = SPECIAL_QUESTION_QUESTION[ q_type_selected ]
+            context['question_target'] = target.student
+            context['choices'] = choices
+    return context
+
+def create_propose_question(st):
+    context = {}
+    context['question_target'] = st
+    context['question_type'] = ('propose', PROPOSE_QUESTION_POINTS)
+    context['question_content'] = "WOW! That was lucky! YOU can now propose a question:"
+    return context
 
 def create_question(st, college, level):
     context = {}
 
-    personal = random.random() < 0.5
+    if is_propose_question():
+        return create_propose_question(st)
 
-    if personal:
-        # Create personal quertion type:
-        q_ans = SpecialQuestionAnswer.objects.filter(student=st)
-        if ask_question(len(q_ans), level):
-            q_type_selected = ""
-            answered_questions_types = [q.qtype for q in q_ans]
-            unanswered_questions_types = []
-            for qtype, pts in SPECIAL_QUESTION_CONTENT:
-                if not qtype in answered_questions_types:
-                    unanswered_questions_types.append( qtype )
-            for i in range(len(unanswered_questions_types)):
-                if len(unanswered_questions_types) == i+1 or random.random() < 0.5:
-                    q_type_selected = unanswered_questions_types[i]
-                if q_type_selected != "":
-                    break
-
-            if q_type_selected != "":
-                context['question_type'] = (q_type_selected, dict(SPECIAL_QUESTION_CONTENT)[q_type_selected])
-                context['question_content'] = SPECIAL_QUESTION_RESEARCH[ q_type_selected ]
-                context['question_target'] = st
-                return context
-        else:
-            q_available = available_special_questions(college, level)
-            if len(q_available) > 0:
-                q_index = random.randrange(min(int(level*1.5), len(q_available)))
-                q_type_selected = SPECIAL_QUESTION_CONTENT[q_index][0]
-
-                all_answers = SpecialQuestionAnswer.objects.filter(college=college, qtype=q_type_selected)
-                random.shuffle(all_answers)
-
-                target = all_answers[0]
-                if target.student == st:
-                    target = all_answers[1]
-                choices = [target.answer]
-                for ans in all_answers[1:]:
-                    if not ans.answer in choices:
-                        choices.append(ans.answer)
-                    if len(choices) == 4:
-                        break
-
-                context['question_type'] = (q_type_selected, dict(SPECIAL_QUESTION_CONTENT)[q_type_selected])
-                context['question_content'] = SPECIAL_QUESTION_QUESTION[ q_type_selected ]
-                context['question_target'] = target.student
-                context['choices'] = choices
-                return context
+    if is_personal_question(level):
+        context = create_personal_question(st, college, level)
+        if context != {}:
+            return context
 
     # Create normal question type
     allstudents = [st for st in Student.objects.filter(college=college).exclude(id=st.id)]
 
-    rr = random.randrange(level)
-    question_type = QUESTION_TYPES[ min([rr, len(QUESTION_TYPES)-1]) ]
+    rr = random.randrange( min(level, len(QUESTION_TYPES)-1) )
+    question_type = QUESTION_TYPES[rr]
 
     random.shuffle(allstudents)
     target = None
@@ -278,16 +314,15 @@ def create_question(st, college, level):
     return context
 
 def verify_question(user, target, question_type, answer):
-    print user, target, question_type, answer
-    if user == target and question_type in SPECIAL_QUESTION_RESEARCH:
-        qans = SpecialQuestionAnswer.objects.filter(student=user, qtype=question_type)
-        if len(qans) == 0:
-            ans = SpecialQuestionAnswer(student=user, qtype=question_type, answer=answer, college=user.college)
-            ans.save()
-        else:
-            raise RuntimeError
-        return True
+    if user == target and question_type == 'propose':
+        return answer != None and answer != ""
 
+    if question_type in SPECIAL_QUESTION_RESEARCH:
+        if user != target:
+            qans = SpecialQuestionAnswer.objects.filter(student=target, qtype=question_type)
+            return (len(qans) != 0) and qans[0].answer == answer
+        else:
+            return True
 
     if question_type == 'name':
         return (target.fname + " " + target.lname == answer)
@@ -323,6 +358,8 @@ def get_added_points(q_type):
         return dict(QUESTION_TYPES)[ q_type ]
     if q_type in dict(SPECIAL_QUESTION_CONTENT):
         return dict(SPECIAL_QUESTION_CONTENT)[ q_type ]
+    if q_type == 'propose':
+        return PROPOSE_QUESTION_POINTS
     return 0
 
 # OLD GAME Settings:
@@ -343,3 +380,6 @@ def get_added_points(q_type):
 #     10: "Jack",
 #     11: 'Andrei Militaru'
 # }
+
+# Arts Olympics session
+# POINT_PER_LEVEL = [3, 5, 7, 15, 25, 50, 75, 150, 300, 600, 1200, 2500, 5000, 10070, 980000]

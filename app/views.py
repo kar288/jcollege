@@ -94,7 +94,18 @@ def answer_question(request):
 
     target = get_object_or_404(Student, jid=request.POST['uid'])
     q_type = request.POST['q_type']
-    correct = verify_question(user, target, q_type, request.POST['answer'])
+    answer = request.POST['answer']
+    correct = verify_question(user, target, q_type, answer)
+
+    if user == target:
+        if q_type == 'propose':
+            prop = ProposeQuestion(student=user, new_question=answer)
+            prop.save()
+        if q_type in SPECIAL_QUESTION_RESEARCH:
+            qans = SpecialQuestionAnswer.objects.filter(student=user, qtype=q_type)
+            if len(qans) == 0:
+                ans = SpecialQuestionAnswer(student=user, qtype=q_type, answer=answer.capitalize(), college=user.college)
+                ans.save()
 
     pop_studs = Popularity.objects.filter(stud=target)
     if len(pop_studs) == 0:

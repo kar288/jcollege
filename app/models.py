@@ -75,6 +75,10 @@ class SpecialQuestionAnswer(models.Model):
 									default=MERCATOR)
 	answer = models.CharField(max_length=1000)
 
+class ProposeQuestion(models.Model):
+	student = models.ForeignKey(Student)
+	new_question = models.CharField(max_length=140)
+
 major_list = {
 	'CS': 'Computer Science',
 	'EECS': 'Electrical Engineering and Computer Science',
