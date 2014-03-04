@@ -151,7 +151,7 @@ def available_special_questions(college, level):
     return q_available
 
 def get_special_questions_showed(level):
-    alpha = level / MAX_LEVEL
+    alpha = 1.0 * level / MAX_LEVEL
     raw_showed = (1.0 - alpha) * 1 + alpha * TOTAL_NR_SPECIAL_QUESTIONS
     return math.ceil(raw_showed)
 
@@ -165,6 +165,11 @@ def is_propose_question():
 
 def should_ask_question(nr_q_ans, nr_q_avail, level):
     if nr_q_avail == 0:
+        if nr_q_ans > get_special_questions_showed(4):
+            # If the user answered question for level 4 already
+            # and no one else is playing, stop asking questions
+            return False
+        # Get more answers from users
         return True
     coeff = 2
     if nr_q_ans > nr_q_avail:
@@ -189,7 +194,7 @@ def create_personal_question(st, college, level):
             if not qtype in answered_questions_types:
                 unanswered_questions_types.append( qtype )
         for i in range(len(unanswered_questions_types)):
-            if len(unanswered_questions_types) == i+1 or random.random() < 0.5:
+            if len(unanswered_questions_types) == i+1 or random.random() < 0.66:
                 q_type_selected = unanswered_questions_types[i]
             if q_type_selected != "":
                 break
@@ -200,7 +205,7 @@ def create_personal_question(st, college, level):
             context['question_target'] = st
     else:
         if len(q_available) > 0:
-            q_index = random.randrange(min(int(level*1.5), len(q_available)))
+            q_index = random.randrange( get_special_questions_showed(level) )
             q_type_selected = SPECIAL_QUESTION_CONTENT[q_index][0]
 
             all_answers = [x for x in SpecialQuestionAnswer.objects.filter(college=college, qtype=q_type_selected)]
