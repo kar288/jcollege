@@ -14,32 +14,32 @@ COLLEGES = (
 )
 
 class Student(User):
-	jid = models.CharField(max_length = 40);
-	lname = models.CharField(max_length = 100);
-	fname = models.CharField(max_length = 100);
+	jid = models.CharField(max_length = 40)
+	lname = models.CharField(max_length = 100)
+	fname = models.CharField(max_length = 100)
 	college = models.CharField(max_length=1,
 									choices=COLLEGES,
 									default=MERCATOR)
-	room = models.CharField(max_length = 6);
-	phone = models.CharField(max_length = 100);
-	country = models.CharField(max_length = 100);
-	majorinfo = models.CharField(max_length = 100);
-	majorlong = models.CharField(max_length = 100);
-	major = models.CharField(max_length = 50);
-	year = models.CharField(max_length = 10);
-	photourl = models.CharField(max_length = 100);
+	room = models.CharField(max_length = 6)
+	phone = models.CharField(max_length = 100)
+	country = models.CharField(max_length = 100)
+	majorinfo = models.CharField(max_length = 100)
+	majorlong = models.CharField(max_length = 100)
+	major = models.CharField(max_length = 50)
+	year = models.CharField(max_length = 10)
+	photourl = models.CharField(max_length = 100)
 	points = models.IntegerField(default= 0)
 	
 class Question(models.Model):
-	about_user = models.ForeignKey(Student, unique=True);
-	content = models.CharField(max_length = 200);
-	answer = models.CharField(max_length = 200);
+	about_user = models.ForeignKey(Student, unique=True)
+	content = models.CharField(max_length = 200)
+	answer = models.CharField(max_length = 200)
 
 class College(models.Model):
 	name = models.CharField(max_length=1,
 									choices=COLLEGES,
 									default=MERCATOR)
-	points = models.IntegerField(default = 0);
+	points = models.IntegerField(default = 0)
 
 class Popularity(models.Model):
 	stud = models.ForeignKey(Student)
@@ -65,6 +65,15 @@ class TopRankings(models.Model):
 	colleges = models.ManyToManyField(TopCollege)
 	students = models.ManyToManyField(TopStudent)
 	at_time = models.DateTimeField(auto_now=True)
+
+
+class SpecialQuestionAnswer(models.Model):
+	qtype = models.CharField(max_length=40)
+	student = models.ForeignKey(Student)
+	college = models.CharField(max_length=1,
+									choices=COLLEGES,
+									default=MERCATOR)
+	answer = models.CharField(max_length=1000)
 
 major_list = {
 	'CS': 'Computer Science',

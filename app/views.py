@@ -109,7 +109,7 @@ def answer_question(request):
         result['result'] = True
 
         old_level = get_level(user)[0]
-        added_points = dict(QUESTION_TYPES)[ q_type ]
+        added_points = get_added_points( q_type )
         user.points += added_points
         user.save()
         col = College.objects.filter(name=user.college)[0]
@@ -226,9 +226,11 @@ def home(request):
     return render(request, "pages/home.html", context)
 
 def allscores(request):
+    scores = list(PREV_SCORES)
+    scores.reverse()
     context= {
         'page': 'allscores',
-        'sessions': PREV_SCORES
+        'sessions': scores
     }
 
     return render(request, "pages/allscores.html", context)
