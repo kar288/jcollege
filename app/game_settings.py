@@ -103,22 +103,22 @@ YEARS_NAMES = ['Year 2014', 'Year 2015', 'Year 2016']
 
 LEVEL_NAMES = {
     0: "No one",
-    1: "New Born",
-    2: "Pet Rock",
-    3: "Guy stuck in the elevator",
-    4: "Snoop Lion",
-    5: "Joey from friends",
-    6: "Skrillex",
-    7: "Walter White",
-    8: "Darth Vader",
-    9: "Tim Minchin",
-    10: "Charlie Chaplin",
-    11: "Quentin Tarantino",
-    12: "Bob Marley",
-    13: 'Douglas Hofstadter',
-    14: 'Leonardo da Vinci',
-    15: 'Jack',
-    16: 'Jon Lajoie'
+    1: "Alarm sounds",
+    2: "Boring 8:15 class",
+    3: "Get caugth jSleeping",
+    4: "Filling forms @registrar",
+    5: "Meatless lunch! yey!",
+    6: "2:15 GenCS Quiz",
+    7: "Finish Homework",
+    8: "Procrastinate at Coffee Bar",
+    9: "Finish stupid lab report",
+    10: "Get full of Doener",
+    11: "Watch Breaking Bad Finale",
+    12: "Play WhoIsJack",
+    13: 'Party at TOS',
+    14: 'Get shitfaced',
+    15: 'Jack off',
+    16: 'Realize that you are still at the other side'
 }
 
 def get_level(st):
@@ -388,3 +388,22 @@ def get_added_points(q_type):
 
 # Arts Olympics session
 # POINT_PER_LEVEL = [3, 5, 7, 15, 25, 50, 75, 150, 300, 600, 1200, 2500, 5000, 10070, 980000]
+# LEVEL_NAMES = {
+#     0: "No one",
+#     1: "New Born",
+#     2: "Pet Rock",
+#     3: "Guy stuck in the elevator",
+#     4: "Snoop Lion",
+#     5: "Joey from friends",
+#     6: "Skrillex",
+#     7: "Walter White",
+#     8: "Darth Vader",
+#     9: "Tim Minchin",
+#     10: "Charlie Chaplin",
+#     11: "Quentin Tarantino",
+#     12: "Bob Marley",
+#     13: 'Douglas Hofstadter',
+#     14: 'Leonardo da Vinci',
+#     15: 'Jack',
+#     16: 'Jon Lajoie'
+# }
