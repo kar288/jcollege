@@ -105,7 +105,7 @@ LEVEL_NAMES = {
     0: "No one",
     1: "Alarm sounds",
     2: "Boring 8:15 class",
-    3: "Get caugth jSleeping",
+    3: "Get caught jSleeping",
     4: "Fill forms @registrar",
     5: "Meatless lunch! yey!",
     6: "2:15 GenCS Quiz",
