@@ -270,6 +270,15 @@ def campusnet_login(l_username, l_password):
 
     return returned_page
 
+@login_required
+def proposed_questions(request):
+    if request.user.username != "dhasegan":
+        raise Http404
+
+    context = {}
+    context['proposed_questions'] = ProposeQuestion.objects.all()
+    return render(request, "pages/proposed_questions.html", context)
+
 def user_authenticated(request):
     if request.user and request.user.is_authenticated():
         return request.user.username

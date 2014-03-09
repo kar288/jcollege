@@ -98,7 +98,7 @@ SPECIAL_QUESTION_RESEARCH = {
     'holiday': "What's YOUR perfect holiday?",
     'toy': "What's YOUR favorite childhood toy?",
     'dream-job': "What's YOUR dream job?",
-    'future-plans': "What's YOUR future plans?",
+    'future-plans': "What are YOUR future plans?",
 }
 
 YEARS = ['14', '15', '16']

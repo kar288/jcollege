@@ -1,0 +1,24 @@
+{% extends 'pages/menuBase.html' %}
+
+
+{% block content %}
+<div class="question-content row">
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading panel-score-heading">
+                Proposed questions:
+            </div>
+            <div class="panel-body">
+                {% for pq in proposed_questions %}
+                    {{ pq.student.fname }} {{ pq.student.lname }} ({{ pq.student.username }}): {{ pq.new_question }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <div class="col-md-4">
+    </div>
+</div>
+{% endblock %}
