@@ -44,12 +44,12 @@ def question_context(request):
     context['top_players_max_level'] = min(level+3,MAX_LEVEL) == MAX_LEVEL
     # UNCOMMENT THIS FOR POPULARITY TAB
     # popularities = Popularity.objects.filter(total_questions__gt=0)
-    if random.randint(0,200) == 0:
+    if random.randint(0,500) == 0:
         remake_popularity()
-    context['popular_users'] = get_popular_users()[0:level]
+    # context['popular_users'] = get_popular_users()[0:level]
     if level == MAX_LEVEL:
         context['max_level'] = True
-    context['popular_colleges'] = get_popular_colleges()
+    # context['popular_colleges'] = get_popular_colleges()
     if user not in context['top_players']:
     	context['not_in_top'] = True;
     context['top_colleges'] = get_top_colleges()
@@ -172,10 +172,10 @@ def answer_question(request):
     context['top_players_max_level'] = min(level+3,MAX_LEVEL) == MAX_LEVEL
     # UNCOMMENT THIS FOR POPULARITY TAB
     # popularities = Popularity.objects.filter(total_questions__gt=0)
-    if random.randint(0,200) == 0:
+    if random.randint(0,500) == 0:
         remake_popularity()
-    context['popular_users'] = get_popular_users()[0:level]
-    context['popular_colleges'] = get_popular_colleges()
+    # context['popular_users'] = get_popular_users()[0:level]
+    # context['popular_colleges'] = get_popular_colleges()
     context['max_level'] = (level == MAX_LEVEL)
 
     context['user'] = user;
