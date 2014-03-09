@@ -224,6 +224,7 @@ def create_personal_question(st, college, level):
             context['question_type'] = (q_type_selected, dict(SPECIAL_QUESTION_CONTENT)[q_type_selected])
             context['question_content'] = SPECIAL_QUESTION_QUESTION[ q_type_selected ]
             context['question_target'] = target.student
+            random.shuffle(choices)
             context['choices'] = choices
     return context
 
