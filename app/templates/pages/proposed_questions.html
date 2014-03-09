@@ -10,7 +10,7 @@
             </div>
             <div class="panel-body">
                 {% for pq in proposed_questions %}
-                    {{ pq.student.fname }} {{ pq.student.lname }} ({{ pq.student.username }}): {{ pq.new_question }}
+                    {{ pq.student.fname }} {{ pq.student.lname }} ({{ pq.student.username }}): {{ pq.new_question }} <br>
                 {% endfor %}
             </div>
         </div>
