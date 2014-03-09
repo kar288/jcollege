@@ -272,7 +272,8 @@ def campusnet_login(l_username, l_password):
 
 @login_required
 def proposed_questions(request):
-    if request.user.username != "dhasegan":
+    if request.user.username != "dhasegan" and \
+        request.user.username != "uagha":
         raise Http404
 
     context = {}
