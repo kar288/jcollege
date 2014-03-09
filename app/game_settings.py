@@ -45,6 +45,7 @@ SPECIAL_QUESTION_CONTENT = \
     ('save-house', 3), \
     ('bremen-bar', 3), \
     ('professor', 5), \
+    ('number', 3), \
     ('fav-sport', 5), \
     ('fav-movie', 5), \
     ('fav-actor', 5), \
@@ -56,7 +57,8 @@ SPECIAL_QUESTION_CONTENT = \
     ('holiday', 10), \
     ('toy', 10), \
     ('dream-job', 10), \
-    ('future-plans', 10)]
+    ('future-plans', 10), \
+    ('life-purpose', 15)]
 PROPOSE_QUESTION_POINTS = 50
 TOTAL_NR_SPECIAL_QUESTIONS = len(SPECIAL_QUESTION_CONTENT)
 
@@ -68,6 +70,7 @@ SPECIAL_QUESTION_QUESTION = {
     'save-house': "A house is burning, the owner can only save 1 thing, what will he/she save?",
     'bremen-bar': "What is his/her favorite bremen bar?",
     'professor': "What is his/her favorite professor at Jacobs?",
+    'number': "What is his/her favorite number?",
     'fav-sport': "What is his/her favorite sport?",
     'fav-movie': "What is his/her favorite movie?",
     'fav-actor': "What is his/her favorite actor?",
@@ -80,6 +83,7 @@ SPECIAL_QUESTION_QUESTION = {
     'toy': "What is his/her favorite childhood toy?",
     'dream-job': "What is his/her dream job?",
     'future-plans': "What is his/her future plans?",
+    'life-purpose': "What is the purpose of life?",
 }
 
 SPECIAL_QUESTION_RESEARCH = {
@@ -90,6 +94,7 @@ SPECIAL_QUESTION_RESEARCH = {
     'save-house': "Your house is burning, you can only save 1 thing, what will you save?", # slal
     'bremen-bar': "What's YOUR favorite bremen bar?",
     'professor': "What's YOUR favorite professor at Jacobs?",
+    'number': "What is YOUR favorite number?",
     'fav-sport': "What is YOUR favorite sport?", # sappelhoff
     'fav-movie': "What's YOUR favorite movie?",
     'fav-actor': "What's YOUR favorite actor?",
@@ -102,6 +107,7 @@ SPECIAL_QUESTION_RESEARCH = {
     'toy': "What's YOUR favorite childhood toy?",
     'dream-job': "What's YOUR dream job?",
     'future-plans': "What are YOUR future plans?",
+    'life-purpose': "What is the purpose of life?", # kalnahas
 }
 
 YEARS = ['14', '15', '16']
