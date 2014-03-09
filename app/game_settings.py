@@ -42,6 +42,7 @@ SPECIAL_QUESTION_CONTENT = \
     ('alcohol-type', 2), \
     ('fav-food', 2), \
     ('bring-on-island', 3), \
+    ('save-house', 3), \
     ('bremen-bar', 3), \
     ('professor', 5), \
     ('fav-movie', 5), \
@@ -63,6 +64,7 @@ SPECIAL_QUESTION_QUESTION = {
     'alcohol-type': "What is his/her favorite alcohol type?",
     'fav-food': "What is his/her favorite food?",
     'bring-on-island': "What would he/she bring on a deserted island?",
+    'save-house': "A house is burning, the owner can only save 1 thing, what will he/she save?",
     'bremen-bar': "What is his/her favorite bremen bar?",
     'professor': "What is his/her favorite professor at Jacobs?",
     'fav-movie': "What is his/her favorite movie?",
@@ -83,6 +85,7 @@ SPECIAL_QUESTION_RESEARCH = {
     'alcohol-type': "What's YOUR favorite alcohol type?",
     'fav-food': "What is YOUR favorite food?",
     'bring-on-island': "What would YOU bring on a deserted island?",
+    'save-house': "Your house is burning, you can only save 1 thing, what will you save?", # slal
     'bremen-bar': "What's YOUR favorite bremen bar?",
     'professor': "What's YOUR favorite professor at Jacobs?",
     'fav-movie': "What's YOUR favorite movie?",
