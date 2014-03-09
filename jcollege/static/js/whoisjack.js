@@ -59,12 +59,18 @@ function submitAnswer(event) {
 }
 
 function newQuestion() {
-	$.getJSON("/new_question/", function(data) {
-		$('.question-wrapper').empty()
-		$('.question-wrapper').append(data.question)
-		var frm = $('.question-form');
-		frm.submit(submitAnswer);
-	}); 
+    $.ajax({
+        method: "post",
+        dataType: "json",
+        data: "csrfmiddlewaretoken=" + $('input[name="nextcsrf"]').val(),
+        url: '/new_question/',
+        success: function(data) {
+            $('.question-wrapper').empty()
+            $('.question-wrapper').append(data.question)
+            var frm = $('.question-form');
+            frm.submit(submitAnswer);
+        }
+    });
 }
 var target_date = new Date('Mar, 3, 2014').getTime();
 var countdown = $('#timer');

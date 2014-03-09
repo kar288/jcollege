@@ -40,8 +40,6 @@ def question_context(request):
     context['progress'] = get_progress(user)
     context['points'] = user.points
     context['question'] = create_question(user, user.college, level)
-    if user.username == "sshukla":
-        print context['question']
     context['top_players'] = get_top_players()[0:min(level+3,MAX_LEVEL)]
     context['top_players_max_level'] = min(level+3,MAX_LEVEL) == MAX_LEVEL
     # UNCOMMENT THIS FOR POPULARITY TAB
