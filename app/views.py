@@ -40,6 +40,8 @@ def question_context(request):
     context['progress'] = get_progress(user)
     context['points'] = user.points
     context['question'] = create_question(user, user.college, level)
+    if user.username == "sshukla":
+        print context['question']
     context['top_players'] = get_top_players()[0:min(level+3,MAX_LEVEL)]
     context['top_players_max_level'] = min(level+3,MAX_LEVEL) == MAX_LEVEL
     # UNCOMMENT THIS FOR POPULARITY TAB
@@ -215,9 +217,9 @@ def home(request):
     # Uncomment this when testing is done
     cn_page = campusnet_login(request.POST['user'], request.POST['pass'])
 
-    if cn_page.find('Wrong username or password') != -1:
-        context['error'] = "Wrong username or password!"
-        return render(request, "pages/home.html", context)
+    # if cn_page.find('Wrong username or password') != -1:
+    #     context['error'] = "Wrong username or password!"
+    #     return render(request, "pages/home.html", context)
     
     users = Student.objects.filter(username=l_username)
     if len(users) != 1:
