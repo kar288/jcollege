@@ -6,17 +6,6 @@
     <div class="col-md-8">
         <div class="panel panel-default">
             <div class="panel-heading panel-score-heading">
-                Proposed questions:
-            </div>
-            <div class="panel-body">
-                {% for pq in proposed_questions %}
-                    {{ pq.student.fname }} {{ pq.student.lname }} ({{ pq.student.username }}): {{ pq.new_question }} <br>
-                {% endfor %}
-            </div>
-        </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading panel-score-heading">
                 Users
             </div>
             <div class="panel-body">
@@ -72,9 +61,17 @@
         </div>
     </div>
 
-    </div>
-
     <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading panel-score-heading">
+                Proposed questions:
+            </div>
+            <div class="panel-body">
+                {% for pq in proposed_questions %}
+                    <b>{{ pq.student.fname }} {{ pq.student.lname }} </b> ({{ pq.student.username }}): {{ pq.new_question }} <br>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
