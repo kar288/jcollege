@@ -277,6 +277,17 @@ def proposed_questions(request):
 
     context = {}
     context['proposed_questions'] = ProposeQuestion.objects.all()
+
+    studs = Student.objects.filter(points__gt=0)
+    slist = []
+    for s in studs:
+        slist.append({
+            'student': s,
+            'level': get_level(s),
+            'col': dict(COLLEGES)[s.student.college],
+            'anss': SpecialQuestionAnswer.objects.filter(student=s)
+        })
+    context['students'] = sorted(slist, key=lambda x:x['student'].points, reverse=True)
     return render(request, "pages/proposed_questions.html", context)
 
 def user_authenticated(request):

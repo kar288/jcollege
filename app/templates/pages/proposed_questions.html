@@ -14,6 +14,62 @@
                 {% endfor %}
             </div>
         </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading panel-score-heading">
+                Users
+            </div>
+            <div class="panel-body">
+                <table class="table no-margin">
+                    <thead>
+                      <tr>
+                            <th>
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Points
+                            </th>
+                            <th>
+                                Level
+                            </th>
+                            <th>
+                                Q Ans
+                            </th>
+                            <th>
+                                College
+                            </th>
+                      </tr>  
+                    </thead>
+
+                    <tbody>
+                        {% for st in students %}
+                            <tr>
+                                <td>
+                                    {{ forloop.counter }}
+                                </td>
+                                <td>
+                                    {{ st.student.fname }} {{ st.student.lname }}
+                                </td>
+                                <td>
+                                    {{ st.student.points }}
+                                </td>
+                                <td>
+                                    {{ st.level.0 }}
+                                </td>
+                                <td>
+                                    {{ st.anss|length }}
+                                </td>
+                                <td>
+                                    <img class="college-icon" src="{{ STATIC_URL }}images/{{st.col}}.jpg" alt="{{ st.col }}">
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     </div>
