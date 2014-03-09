@@ -153,7 +153,7 @@ def available_special_questions(college, level):
 def get_special_questions_showed(level):
     alpha = 1.0 * level / MAX_LEVEL
     raw_showed = (1.0 - alpha) * 1 + alpha * TOTAL_NR_SPECIAL_QUESTIONS
-    return math.ceil(raw_showed)
+    return min(TOTAL_NR_SPECIAL_QUESTIONS, math.ceil(raw_showed) + 3)
 
 def is_personal_question(level):
     alpha = 1.0 * level / MAX_LEVEL
