@@ -271,7 +271,7 @@ def campusnet_login(l_username, l_password):
     return returned_page
 
 @login_required
-def proposed_questions(request):
+def admin_page(request):
     if request.user.username != "dhasegan" and \
         request.user.username != "uagha":
         raise Http404
@@ -288,8 +288,24 @@ def proposed_questions(request):
             'col': dict(COLLEGES)[s.student.college],
             'anss': SpecialQuestionAnswer.objects.filter(student=s)
         })
+    colleges = ["M", "C", "N", "K"]
+    specialq_list = []
+    for qcontent in SPECIAL_QUESTION_CONTENT:
+        col_list = []
+        for col in colleges:
+            anss = SpecialQuestionAnswer.objects.filter(qtype=qcontent[0], college=col)
+            col_list.append( {
+                'college': dict(COLLEGES)[col],
+                'answers': anss
+            })
+        specialq_list.append({
+            'qtype': qcontent[0],
+            'answers': col_list
+        })
+    context['special_questions'] = specialq_list
+
     context['students'] = sorted(slist, key=lambda x:x['student'].points, reverse=True)
-    return render(request, "pages/proposed_questions.html", context)
+    return render(request, "pages/admin_page.html", context)
 
 def user_authenticated(request):
     if request.user and request.user.is_authenticated():

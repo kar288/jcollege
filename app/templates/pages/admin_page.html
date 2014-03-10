@@ -72,6 +72,37 @@
                 {% endfor %}
             </div>
         </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading panel-score-heading">
+                Special questions answers:
+            </div>
+            <div class="panel-body">
+                {% for sq in special_questions %}
+                    <b>{{ sq.qtype }}:</b> <br>
+
+                    <table class="table no-margin">
+                        <tbody>
+                            {% for col in sq.answers %}
+                                {% for ans in col.answers %}
+                                <tr>
+                                    <td>
+                                        {{ forloop.counter }}
+                                    </td>
+                                    <td>
+                                        {{ ans.answer }}
+                                    </td>
+                                    <td>
+                                        <img class="college-icon" src="{{ STATIC_URL }}images/{{col.college}}.jpg" alt="{{ st.college }}">
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
