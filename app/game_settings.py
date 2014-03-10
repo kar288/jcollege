@@ -170,6 +170,34 @@ def get_special_questions_showed(level):
     raw_showed = (1.0 - alpha) * 1 + alpha * TOTAL_NR_SPECIAL_QUESTIONS
     return min(TOTAL_NR_SPECIAL_QUESTIONS, math.ceil(raw_showed) + 3)
 
+def get_special_question_type(q_max_index, college):
+    questions = []
+    total_nr_answers = 0
+    i = 0
+    for qcontent in SPECIAL_QUESTION_CONTENT[0:q_max_index]:
+        nr_answers = SpecialQuestionAnswer.objects.filter(college=college, qtype=qcontent[0]).count()
+        if nr_answers < 3:
+            continue
+
+        total_nr_answers += nr_answers
+        questions.append({
+            'qtype': qcontent[0],
+            'nr_answers': nr_answers,
+            'index': i
+        })
+        i += 1
+    if len(questions) == 0:
+        return -1
+
+    s = 0
+    prob = random.random()
+    for q in questions:
+        s += q['nr_answers']
+        if prob <= (1.0 * s / total_nr_answers):
+            return q['index']
+    return questions[len(questions)-1]['index']
+
+
 def is_personal_question(level):
     alpha = 1.0 * level / MAX_LEVEL
     random_coeff = (1.0 - alpha) * 0.5 + alpha * 0.9
@@ -221,7 +249,8 @@ def create_personal_question(st, college, level):
     else:
         if len(q_available) > 0:
             while(True):
-                q_index = random.randrange( get_special_questions_showed(level) )
+                q_index = get_special_question_type( int(get_special_questions_showed(level)), college )
+                # q_index = random.randrange( get_special_questions_showed(level) )
                 q_type_selected = SPECIAL_QUESTION_CONTENT[q_index][0]
 
                 all_answers = [x for x in SpecialQuestionAnswer.objects.filter(college=college, qtype=q_type_selected)]
