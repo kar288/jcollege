@@ -53,6 +53,7 @@ SPECIAL_QUESTION_CONTENT = \
     ('fav-song', 5), \
     ('fav-book', 5), \
     ('fav-author', 5), \
+    ('fav-series', 5), \
     ('fav-game', 5), \
     ('holiday', 10), \
     ('toy', 10), \
@@ -78,6 +79,7 @@ SPECIAL_QUESTION_QUESTION = {
     'fav-song': "What is his/her favorite song?",
     'fav-book': "What is his/her favorite book?",
     'fav-author': "What is his/her favorite author?",
+    'fav-series': "What is his/her favorite TV-Show?",
     'fav-game': "What is his/her favorite game?",
     'holiday': "What is his/her perfect holiday?",
     'toy': "What is his/her favorite childhood toy?",
@@ -102,6 +104,7 @@ SPECIAL_QUESTION_RESEARCH = {
     'fav-song': "What's YOUR favorite song?",
     'fav-book': "What's YOUR favorite book?",
     'fav-author': "What's YOUR favorite author?",
+    'fav-series': "What's YOUR favorite TV-Show?",
     'fav-game': "What's YOUR favorite game?",
     'holiday': "What's YOUR perfect holiday?",
     'toy': "What's YOUR favorite childhood toy?",
