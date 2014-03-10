@@ -227,6 +227,7 @@ def create_personal_question(st, college, level):
                 all_answers = [x for x in SpecialQuestionAnswer.objects.filter(college=college, qtype=q_type_selected)]
                 if len(all_answers) < 3:
                     continue
+                random.shuffle(all_answers)
 
                 target = all_answers[0]
                 if target.student == st:
