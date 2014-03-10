@@ -44,7 +44,7 @@ def question_context(request):
     context['top_players_max_level'] = min(level+3,MAX_LEVEL) == MAX_LEVEL
     # UNCOMMENT THIS FOR POPULARITY TAB
     # popularities = Popularity.objects.filter(total_questions__gt=0)
-    if random.randint(0,500) == 0:
+    if random.randint(0,2000) == 0:
         remake_popularity()
     # context['popular_users'] = get_popular_users()[0:level]
     if level == MAX_LEVEL:
@@ -172,7 +172,7 @@ def answer_question(request):
     context['top_players_max_level'] = min(level+3,MAX_LEVEL) == MAX_LEVEL
     # UNCOMMENT THIS FOR POPULARITY TAB
     # popularities = Popularity.objects.filter(total_questions__gt=0)
-    if random.randint(0,500) == 0:
+    if random.randint(0,2000) == 0:
         remake_popularity()
     # context['popular_users'] = get_popular_users()[0:level]
     # context['popular_colleges'] = get_popular_colleges()
