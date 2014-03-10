@@ -299,7 +299,7 @@ def create_question(st, college, level):
     # Create normal question type
     allstudents = [st for st in Student.objects.filter(college=college).exclude(id=st.id)]
 
-    rr = random.randrange( min(level, len(QUESTION_TYPES)-1) )
+    rr = random.randrange( min(level, len(QUESTION_TYPES)) )
     question_type = QUESTION_TYPES[rr]
 
     random.shuffle(allstudents)
