@@ -55,6 +55,7 @@ SPECIAL_QUESTION_CONTENT = \
     ('fav-author', 5), \
     ('fav-series', 5), \
     ('fav-game', 5), \
+    ('fav-place', 7), \
     ('holiday', 10), \
     ('toy', 10), \
     ('dream-job', 10), \
@@ -81,6 +82,7 @@ SPECIAL_QUESTION_QUESTION = {
     'fav-author': "What is his/her favorite author?",
     'fav-series': "What is his/her favorite TV-Show?",
     'fav-game': "What is his/her favorite game?",
+    'fav-place': "What is his/her favorite place on campus?",
     'holiday': "What is his/her perfect holiday?",
     'toy': "What is his/her favorite childhood toy?",
     'dream-job': "What is his/her dream job?",
@@ -104,8 +106,9 @@ SPECIAL_QUESTION_RESEARCH = {
     'fav-song': "What's YOUR favorite song?",
     'fav-book': "What's YOUR favorite book?",
     'fav-author': "What's YOUR favorite author?",
-    'fav-series': "What's YOUR favorite TV-Show?",
+    'fav-series': "What's YOUR favorite TV-Show?", # oboychenko
     'fav-game': "What's YOUR favorite game?",
+    'fav-place': "What is YOUR favorite place on campus?", # nkrueger
     'holiday': "What's YOUR perfect holiday?",
     'toy': "What's YOUR favorite childhood toy?",
     'dream-job': "What's YOUR dream job?",
