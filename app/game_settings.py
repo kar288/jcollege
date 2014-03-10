@@ -220,27 +220,32 @@ def create_personal_question(st, college, level):
             context['question_target'] = st
     else:
         if len(q_available) > 0:
-            q_index = random.randrange( get_special_questions_showed(level) )
-            q_type_selected = SPECIAL_QUESTION_CONTENT[q_index][0]
+            while(True):
+                q_index = random.randrange( get_special_questions_showed(level) )
+                q_type_selected = SPECIAL_QUESTION_CONTENT[q_index][0]
 
-            all_answers = [x for x in SpecialQuestionAnswer.objects.filter(college=college, qtype=q_type_selected)]
-            random.shuffle(all_answers)
+                all_answers = [x for x in SpecialQuestionAnswer.objects.filter(college=college, qtype=q_type_selected)]
+                if len(all_answers) < 3:
+                    continue
 
-            target = all_answers[0]
-            if target.student == st:
-                target = all_answers[1]
-            choices = [target.answer]
-            for ans in all_answers:
-                if not ans.answer in choices:
-                    choices.append(ans.answer)
-                if len(choices) == 4:
-                    break
+                target = all_answers[0]
+                if target.student == st:
+                    target = all_answers[1]
+                choices = [target.answer]
+                for ans in all_answers[1:]:
+                    if not ans.answer in choices:
+                        choices.append(ans.answer)
+                    if len(choices) == 4:
+                        break
+                if len(choices) < 3:
+                    continue
 
-            context['question_type'] = (q_type_selected, dict(SPECIAL_QUESTION_CONTENT)[q_type_selected])
-            context['question_content'] = SPECIAL_QUESTION_QUESTION[ q_type_selected ]
-            context['question_target'] = target.student
-            random.shuffle(choices)
-            context['choices'] = choices
+                context['question_type'] = (q_type_selected, dict(SPECIAL_QUESTION_CONTENT)[q_type_selected])
+                context['question_content'] = SPECIAL_QUESTION_QUESTION[ q_type_selected ]
+                context['question_target'] = target.student
+                random.shuffle(choices)
+                context['choices'] = choices
+                break
     return context
 
 def create_propose_question(st):
